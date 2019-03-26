@@ -3,8 +3,14 @@ cmake_minimum_required(VERSION 3.9)
 find_program(PERL_COMMAND perl)
 
 find_package(Boost COMPONENTS filesystem system)
+if(NOT PERL_COMMAND)
+    message(FATAL_ERROR "Cannot find command: 'perl' (needed for building!)")
+endif()
 
 find_program(BISON_COMMAND bison)
+if(NOT BISON_COMMAND)
+    message(FATAL_ERROR "Cannot find command: 'bison' (needed for building!)")
+endif()
 find_package(Threads REQUIRED)
 
 include_directories(include/)
