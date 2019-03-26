@@ -11,5 +11,14 @@ pool:
 
 steps:
 - script: |
-    vcpkg install sdl2 boost-filesystem boost-system qt5-base
-  displayName: 'vcpkg install'
+    vcpkg install sdl2 boost-filesystem boost-system
+  displayName: 'vcpkg install, non-Qt'
+- script: |
+    vcpkg install qt5-base
+  displayName: 'vcpkg install, Qt'
+- script: |
+    mkdir build
+    cd build
+    cmake -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DFRONT_END=qt -T"llvm" ..
+    cmake --build .
+  displayName: 'cmake'
