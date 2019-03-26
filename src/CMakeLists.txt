@@ -529,6 +529,13 @@ set(include_sources
 
 include(trap_instances/trap_instances.cmake)
 
+if(WIN32)
+    set(host_platform_sources ../windows/dirent.c ../windows/gettimeofday.cpp)
+else()
+    set(host_platform_sources)
+endif()
+source_group(HostPlatform FILES ${host_platform_sources})
+
 set(sources ${base_sources} ${mman_sources} ${vdriver_sources}
     ${ctl_sources} ${dial_sources} 
     ${list_sources} ${menu_sources}
@@ -537,7 +544,7 @@ set(sources ${base_sources} ${mman_sources} ${vdriver_sources}
     ${sound_sources} ${num_sources} ${misc_sources}
     ${file_sources} ${hfs_sources} ${time_sources} ${osevent_sources}
     ${error_sources} ${commandline_sources} ${prefs_sources}
-    ${trap_instance_sources}
+    ${trap_instance_sources} ${host_platform_sources}
     ${include_sources})
 
 add_library(romlib ${sources}
