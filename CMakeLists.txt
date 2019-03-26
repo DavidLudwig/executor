@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
+
+# Use packaged CMake modules for use with find_package(...), if and as needed
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+
 project(Executor)
 
 set(CMAKE_CXX_STANDARD 17)
