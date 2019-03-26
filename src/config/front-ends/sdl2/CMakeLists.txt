@@ -7,13 +7,13 @@ if(SDL2_FOUND)
         keycode_map.cpp
     )
 
-        # workaround for SDL2_LIBRARIES containing trailing whitespace that is illegal in CMake 3.10
-    if(SDL2_LIBRARIES)
-        string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
+    # workaround for SDL2_LIBRARY containing trailing whitespace that is illegal in CMake 3.10
+    if(SDL2_LIBRARY)
+        string(STRIP "${SDL2_LIBRARY}" SDL2_LIBRARY)
     endif()
 
-    target_link_libraries(front-end-sdl2 syn68k ${SDL2_LIBRARIES})
+    target_link_libraries(front-end-sdl2 syn68k ${SDL2_LIBRARY})
     target_include_directories(front-end-sdl2
         PUBLIC .
-        PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS}/SDL2)
+        PRIVATE ${SDL2_INCLUDE_DIR} ${SDL2_INCLUDE_DIR}/SDL2)
 endif()
