@@ -1,5 +1,6 @@
 #include <base/logging.h>
 #include <iomanip>
+#include <cctype>
 
 using namespace Executor;
 
@@ -45,7 +46,7 @@ bool logging::canConvertBack(const void* p)
 {
     if(!p || p == (const void*) -1)
         return true;
-#if SIZEOF_VOID_P == 4
+#if SIZEOF_CHAR_P == 4
     bool valid = true;
 #else
     bool valid = false;
@@ -65,7 +66,7 @@ bool logging::validAddress(const void* p)
         return false;
     if( (uintptr_t)p & 1 )
         return false;
-#if SIZEOF_VOID_P == 4
+#if SIZEOF_CHAR_P == 4
     bool valid = true;
 #else
     bool valid = false;

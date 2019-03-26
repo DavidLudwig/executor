@@ -589,7 +589,7 @@ void Executor::C_PrCloseDoc(TPPrPort port)
 
     if(need_pclose)
     {
-#if !defined(CYGWIN32)
+#if !defined(CYGWIN32) && !defined(_MSC_VER)
         pclose(ROMlib_printfile);
 #else
         ; /* CYGWIN32 has no pclose */

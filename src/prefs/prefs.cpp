@@ -1,3 +1,6 @@
+
+#include <dirent.h>
+
 #include <prefs/prefs.h>
 #include <prefs/options.h>
 #include <prefs/parse.h>

@@ -29,6 +29,10 @@
 //#include "dosdisk.h"
 #endif
 
+#ifndef S_ISDIR
+#define S_ISDIR(m) ((m) & S_IFDIR)
+#endif
+
 #include <ctype.h>
 #include <algorithm>
 

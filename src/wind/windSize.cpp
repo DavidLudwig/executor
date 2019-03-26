@@ -16,6 +16,8 @@
 #include <quickdraw/cquick.h>
 #include <wind/wind.h>
 
+#include <algorithm>
+
 using namespace Executor;
 
 /*
