@@ -76,6 +76,11 @@ void Executor::syncint_wait_interrupt()
 {
     std::unique_lock<std::mutex> lock(mutex);
     wake_cond.wait_for(lock, 1s, []() { return INTERRUPT_PENDING(); });
+
+    // unlock here, in case the subsequent call to syncint_check_interrupt()
+    // triggers a call to syncint_post(), which will need to lock 'mutex'.
+    lock.unlock();
+
     syncint_check_interrupt();
 }
 
