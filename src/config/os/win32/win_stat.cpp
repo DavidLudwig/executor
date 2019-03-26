@@ -8,6 +8,7 @@
 
 #include <base/common.h>
 
+#define _WINSOCKAPI_ // Make sure windows.h doesn't #include <winsock.h>, which can redefine 'struct timeval'
 #include <windows.h>
 
 #include <ctype.h>

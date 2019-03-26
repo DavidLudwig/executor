@@ -1,4 +1,6 @@
+#define _WINSOCKAPI_ // Make sure windows.h doesn't #include <winsock.h>, which can redefine 'struct timeval'
 #include <windows.h>
+
 #include <base/common.h>
 #include <rsys/lockunlock.h>
 #include <rsys/os.h>
