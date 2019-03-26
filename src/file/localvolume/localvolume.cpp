@@ -524,7 +524,7 @@ LocalVolume::NonexistentFile LocalVolume::resolveForCreate(mac_string_view name,
         parent = resolveDir(vRefNum, dirID);
     else
     {
-        parent = std::dynamic_pointer_cast<DirectoryItem>(resolve(mac_string_view(name.begin(), colon), vRefNum, dirID));
+        parent = std::dynamic_pointer_cast<DirectoryItem>(resolve(mac_string_view(name.data(), colon), vRefNum, dirID));
         if(!parent)
             throw OSErrorException(dirNFErr);
         name = mac_string_view(name.begin() + colon+1, name.end());
