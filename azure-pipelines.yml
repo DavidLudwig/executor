@@ -14,6 +14,9 @@ steps:
     vcpkg install sdl2 boost-filesystem boost-system
   displayName: 'vcpkg install, non-Qt'
 - script: |
+    vcpkg install bzip2 double-conversion freetype harfbuzz libjpeg-turbo libpng libpq openssl openssl-windows pcre2 ragel sqlite3 zlib
+  displayName: 'vcpkg install, Qt dependencies'
+- script: |
     vcpkg install qt5-base
   displayName: 'vcpkg install, Qt'
 - script: |
