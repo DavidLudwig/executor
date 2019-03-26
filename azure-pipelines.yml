@@ -11,8 +11,5 @@ pool:
 
 steps:
 - script: |
-    mkdir build
-    cd build
-    dir c:\vcpkg
-    where vcpkg
-  displayName: 'cmake'
+    vcpkg install sdl2 boost-filesystem boost-system qt5-base
+  displayName: 'vcpkg install'
