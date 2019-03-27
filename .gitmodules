@@ -1,9 +1,9 @@
 [submodule "syn68k"]
 	path = syn68k
-	url = https://github.com/autc04/syn68k
+	url = https://github.com/davidludwig/syn68k
 [submodule "PowerCore"]
 	path = PowerCore
-	url = https://github.com/autc04/PowerCore.git
+	url = https://github.com/davidludwig/PowerCore.git
 [submodule "cxmon"]
 	path = cxmon
 	url = https://github.com/autc04/cxmon.git
