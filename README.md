@@ -15,7 +15,7 @@ re-implement the classic Mac OS APIs, just as WINE does for Windows.
 Executor 2000 feature highlights:
 
   - Builds and runs on modern 64-bit Linux and macOS (Windows support is planned).
-  - Rootless - emulated Windows are part of your desktop.
+  - Rootless - emulated windows are part of your desktop.
   - PowerPC support (well, not many Apps will run, but it's there)
   - Support for native Mac resource forks (Mac version)
   - Exchange files with Basilisk & SheepShaver
