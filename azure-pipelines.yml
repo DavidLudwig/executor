@@ -1,0 +1,21 @@
+# C/C++ with GCC
+# Build your C/C++ project with GCC using make.
+# Add steps that publish test results, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/c-cpp/gcc
+
+trigger:
+- master
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- script: |
+    vcpkg install sdl2 boost-filesystem boost-system qt5-base
+  displayName: 'vcpkg install'
+- script: |
+    mkdir build
+    cd build
+    cmake -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DFRONT_END=qt -T"llvm" ..
+    cmake --build .
+  displayName: 'cmake'
