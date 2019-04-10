@@ -8,8 +8,8 @@ steps:
 - checkout: self
   submodules: true
 - script: |
-    echo %vsappiddir%
-  displayName: 'check for vsappiddir'
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"
+  displayName: 'check for vcvars*.bat'
 # - script: |
 #     VSIXInstaller.exe
 #   displayName: 'find VSIXInstaller.exe'
