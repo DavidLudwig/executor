@@ -8,18 +8,25 @@ steps:
 - checkout: self
   submodules: true
 - script: |
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
-  displayName: 'check for vcvars*.bat'
-- script: |
-    set
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
     set
-    where VSIXInstaller.exe
-    where wget
-    where curl
-    cd
-    dir
-  displayName: 'find misc stuff'
+  displayName: one
+- script: |
+    set
+  displayName: two
+# - script: |
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
+#   displayName: 'check for vcvars*.bat'
+# - script: |
+#     set
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
+#     set
+#     where VSIXInstaller.exe
+#     where wget
+#     where curl
+#     cd
+#     dir
+#   displayName: 'find misc stuff'
 # - script: |
 #     pip install aqtinstall
 #     C:
