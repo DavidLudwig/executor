@@ -50,7 +50,7 @@ steps:
 #    vcpkg install sdl2
 #  displayName: 'vcpkg install'
 - script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat" x86
     mkdir build
     cd build
     cmake ^
