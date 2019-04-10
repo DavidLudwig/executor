@@ -43,16 +43,18 @@ steps:
 #     dir %temp%
 #   displayName: 'install llvm.vsix'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where cl
-    cl -?
-  displayName: 'check for cl.exe'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where cl
+#     cl -?
+#   displayName: 'check for cl.exe'
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools"
-  displayName: 'dir for includes'
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\"
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+  displayName: 'dir for stuff'
 
 
 # - script: |
