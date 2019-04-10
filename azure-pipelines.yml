@@ -10,9 +10,12 @@ steps:
 - script: |
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
   displayName: 'check for vcvars*.bat'
-# - script: |
-#     VSIXInstaller.exe
-#   displayName: 'find VSIXInstaller.exe'
+- script: |
+    set
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
+    set
+    VSIXInstaller.exe
+  displayName: 'find VSIXInstaller.exe'
 # - script: |
 #     pip install aqtinstall
 #     C:
