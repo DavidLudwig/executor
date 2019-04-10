@@ -14,8 +14,10 @@ steps:
     set
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
     set
-    VSIXInstaller.exe
-  displayName: 'find VSIXInstaller.exe'
+    where VSIXInstaller.exe
+    where wget
+    where curl
+  displayName: 'find misc stuff'
 # - script: |
 #     pip install aqtinstall
 #     C:
