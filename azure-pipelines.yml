@@ -33,7 +33,7 @@ steps:
     where curl
     cd %temp%
     cd
-    curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
+    curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/LLVMExtensions/vsextensions/llvm-toolchain/latest/vspackage -o llvm.vsix
     set INSTALL_ME="%temp%\llvm.vsix"
     echo %INSTALL_ME%
     dir %INSTALL_ME%
