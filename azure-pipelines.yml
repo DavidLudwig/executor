@@ -61,6 +61,8 @@ steps:
     dir Collect.exe
     Collect.exe
     echo Done Collecting
+    cd %temp%
+    cd
     dir
 
 - script: |
