@@ -19,13 +19,31 @@ steps:
 # #   displayName: 'check for vcvars*.bat'
 
 - script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where VSIXInstaller.exe
-    where curl
-    cd %temp%
-    curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
-    VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
-  displayName: 'install llvm.vsix'
+    fsutil dirty query %SYSTEMDRIVE% >nul
+    If %errorLevel% NEQ 0 (
+      Echo Failure, please rerun this script from an elevated command prompt. Exiting...
+      Exit /B 1
+    ) 
+    Echo Success: this script is running elevated.
+  displayName: 'privilege check'
+
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where VSIXInstaller.exe
+#     where curl
+#     cd %temp%
+#     curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
+#     VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
+#   displayName: 'privilege check'
+
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where VSIXInstaller.exe
+#     where curl
+#     cd %temp%
+#     curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
+#     VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
+#   displayName: 'install llvm.vsix'
 
 # # - script: |
 # #     set
