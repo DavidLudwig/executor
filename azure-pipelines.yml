@@ -8,8 +8,11 @@ steps:
 - checkout: self
   submodules: true
 - script: |
-    VSIXInstaller.exe
-  displayName: 'find VSIXInstaller.exe'
+    echo %vsappiddir%
+  displayName: 'check for vsappiddir'
+# - script: |
+#     VSIXInstaller.exe
+#   displayName: 'find VSIXInstaller.exe'
 # - script: |
 #     pip install aqtinstall
 #     C:
