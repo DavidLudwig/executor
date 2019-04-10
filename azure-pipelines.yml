@@ -29,12 +29,15 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where VSIXInstaller.exe
     where curl
     cd %temp%
     cd
     curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
-    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VSIXInstaller.exe" /quiet /admin %temp%/llvm.vsix
+    set INSTALL_ME="%temp%\llvm.vsix"
+    echo %INSTALL_ME%
+    dir %INSTALL_ME%
+    where VSIXInstaller
+    VSIXInstaller /quiet /admin %INSTALL_ME%
   displayName: 'install llvm.vsix'
 
 # - script: |
