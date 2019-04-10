@@ -5,8 +5,9 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- checkout: self
-  submodules: true
+# - checkout: self
+#   submodules: true
+
 # # - script: |
 # #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
 # #     set
