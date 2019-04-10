@@ -53,7 +53,9 @@ steps:
     "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
     --installPath C:\minVS ^
     --add Microsoft.VisualStudio.Workload.CoreEditor ^
-     --passive --norestart --wait
+    --passive --norestart --wait
+    echo Hello
+    
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
