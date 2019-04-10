@@ -46,9 +46,9 @@ steps:
     set PATH=C:\Program Files\LLVM\bin;%PATH%
     clang-cl --version    
   displayName: 'install llvm, ninja, bison'
-#- script: |
-#    vcpkg install sdl2
-#  displayName: 'vcpkg install'
+- script: |
+    vcpkg install sdl2
+  displayName: 'vcpkg install'
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     mkdir build
