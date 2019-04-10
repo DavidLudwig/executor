@@ -51,7 +51,7 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\MSVC\"
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools"
   displayName: 'dir for includes'
 
 
