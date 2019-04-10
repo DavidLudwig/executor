@@ -8,9 +8,8 @@ steps:
 - checkout: self
   submodules: true
 - script: |
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017"
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
   displayName: 'check for vcvars*.bat'
-# dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"
 # - script: |
 #     VSIXInstaller.exe
 #   displayName: 'find VSIXInstaller.exe'
