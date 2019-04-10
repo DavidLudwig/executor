@@ -50,22 +50,29 @@ steps:
 #   displayName: 'check for cl.exe'
 
 - script: |
+    "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
+    --installPath C:\minVS ^
+    --add Microsoft.VisualStudio.Workload.CoreEditor ^
+     --passive --norestart --wait
+
+- script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+    dir "C:\minVS"
   displayName: 'dir for stuff'
 
-- script: |
-    "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
-    modify ^
-    --add Microsoft.VisualStudio.Workload.NativeDesktop ^
-    --includeRecommended ^
-    --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" ^
-    --passive ^
-    --norestart ^
-    --wait
-  displayName: 'install MSVC'
+# - script: |
+#     "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
+#     modify ^
+#     --add Microsoft.VisualStudio.Workload.NativeDesktop ^
+#     --includeRecommended ^
+#     --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" ^
+#     --passive ^
+#     --norestart ^
+#     --wait
+#   displayName: 'install MSVC'
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
