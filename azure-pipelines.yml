@@ -32,8 +32,9 @@ steps:
     where VSIXInstaller.exe
     where curl
     cd %temp%
+    cd
     curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
-    VSIXInstaller /q /a %temp%/llvm.vsix
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VSIXInstaller.exe" /quiet /admin %temp%/llvm.vsix
   displayName: 'install llvm.vsix'
 
 # - script: |
