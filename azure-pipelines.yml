@@ -46,7 +46,7 @@ steps:
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     where cl
-    cl /?
+    cl -?
   displayName: 'check for cl.exe'
 
 - script: |
