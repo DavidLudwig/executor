@@ -17,6 +17,16 @@ steps:
 # # - script: |
 # #     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
 # #   displayName: 'check for vcvars*.bat'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    where VSIXInstaller.exe
+    where curl
+    cd %temp%
+    curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
+    VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
+  displayName: 'install llvm.vsix'
+
 # # - script: |
 # #     set
 # #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
