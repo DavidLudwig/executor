@@ -17,6 +17,8 @@ steps:
     where VSIXInstaller.exe
     where wget
     where curl
+    cd
+    dir
   displayName: 'find misc stuff'
 # - script: |
 #     pip install aqtinstall
