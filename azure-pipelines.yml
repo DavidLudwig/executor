@@ -38,7 +38,14 @@ steps:
     dir %INSTALL_ME%
     where VSIXInstaller
     VSIXInstaller /quiet /admin %INSTALL_ME%
+    echo Done with VSIXInstaller
+    dir %temp%
   displayName: 'install llvm.vsix'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    dir %temp
+  displayName: 'show temp'
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
