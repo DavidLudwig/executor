@@ -30,19 +30,30 @@ steps:
 #    vcpkg install sdl2
 #  displayName: 'vcpkg install'
 - script: |
-    set PATH=C:\Program Files\LLVM\bin;%PATH%
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
     mkdir build
     cd build
-    cmake -G Ninja ^
-      -DCMAKE_BUILD_TYPE=Release ^
-      -DCMAKE_C_COMPILER=clang-cl ^
-      -DCMAKE_CXX_COMPILER=clang-cl ^
+    cmake ^
+      -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
       -DFRONT_END=qt ^
-      -DBISON_COMMAND=win_bison ^
-      -DCMAKE_PREFIX_PATH=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake ^
-      -DBoost_COMPILER=-vc141 ^
+      -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake\Qt5Gui ^
+      -Tllvm ^
       ..
     cmake --build .
+  displayName: 'cmake'
+# - script: |
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%
+#     call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+#     mkdir build
+#     cd build
+#     cmake -G Ninja ^
+#       -DCMAKE_BUILD_TYPE=Release ^
+#       -DCMAKE_C_COMPILER=clang-cl ^
+#       -DCMAKE_CXX_COMPILER=clang-cl ^
+#       -DFRONT_END=qt ^
+#       -DBISON_COMMAND=win_bison ^
+#       -DCMAKE_PREFIX_PATH=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake ^
+#       -DBoost_COMPILER=-vc141 ^
+#       ..
+#     cmake --build .
 
 #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
