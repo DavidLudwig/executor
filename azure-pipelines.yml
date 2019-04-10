@@ -55,7 +55,13 @@ steps:
     --add Microsoft.VisualStudio.Workload.CoreEditor ^
     --passive --norestart --wait
     echo Hello
-    
+    cd %temp%
+    curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+    dir
+    dir Collect.exe
+    Collect.exe
+    echo Done Collecting
+    dir
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
