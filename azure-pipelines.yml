@@ -54,6 +54,11 @@ steps:
     cd c:\
     dir
     dir C:\Qt5.11.3\5.11.3\msvc2017_64
+    dir C:\Qt5.11.3\5.11.3\msvc2017_64\lib
+    dir C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake
+    cd C:\Qt5.11.3\5.11.3\msvc2017_64
+    cd
+    dir /s *cmake
   displayName: 'debug-logging'
 
 # # - script: |
