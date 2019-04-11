@@ -157,3 +157,8 @@ steps:
   inputs:
     artifactName: 'buildfiles'
     targetPath: 'D:/a/1/s'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'VCTargets'
+    targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
