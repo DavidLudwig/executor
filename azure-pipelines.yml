@@ -53,7 +53,7 @@ steps:
     c:
     cd c:\
     dir
-    dir C:\Qt5.11.3\5.11.3
+    dir C:\Qt5.11.3\5.11.3\msvc2017_64
   displayName: 'debug-logging'
 
 # # - script: |
