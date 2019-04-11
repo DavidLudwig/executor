@@ -9,6 +9,8 @@ steps:
   submodules: true
 
 - script: |
+    c:
+    cd c:\
     dir
     dir C:\Qt5.11.3\5.11.3
   displayName: 'debug-logging'
