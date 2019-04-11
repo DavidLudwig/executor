@@ -5,8 +5,8 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- checkout: self
-  submodules: true
+# - checkout: self
+#   submodules: true
 
 # # - script: |
 # #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat" x86
@@ -86,6 +86,10 @@ steps:
     dir optional /s
   displayName: 'dir for c++ headers'
 
+- script: |
+    cd
+  displayName: 'get cd'
+
 # - script: |
 #     "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
 #     modify ^
@@ -97,14 +101,14 @@ steps:
 #     --wait
 #   displayName: 'install MSVC'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where VSIXInstaller.exe
-    where curl
-    cd %temp%
-    curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
-    VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
-  displayName: 'install llvm.vsix'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where VSIXInstaller.exe
+#     where curl
+#     cd %temp%
+#     curl https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix -o llvm.vsix
+#     VSIXInstaller /quiet /skuName:Enterprise /skuVersion:15 %temp%/llvm.vsix
+#   displayName: 'install llvm.vsix'
 
 # # - script: |
 # #     set
@@ -117,44 +121,44 @@ steps:
 # #     dir
 # #   displayName: 'find misc stuff'
 
-- script: |
-    pip install aqtinstall
-    C:
-    cd \
-    python -m aqt 5.11.3 windows desktop win64_msvc2017_64
-  displayName: 'install qt'
-- script: |
-    set
-    dir C:\Qt5.11.3\5.11.3
-    dir "C:/Program Files/Boost/1.69.0"
-    dir "C:/Program Files/Boost/1.69.0/lib"
-    dir "C:/Program Files/Boost/1.69.0/libs"
-    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-  displayName: 'show dirs'
-- script: |
-    choco install llvm ninja winflexbison3 --yes
-    set PATH=C:\Program Files\LLVM\bin;%PATH%
-    clang-cl --version    
-  displayName: 'install llvm, ninja, bison'
-- script: |
-    vcpkg install sdl2
-  displayName: 'vcpkg install'
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    dir C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
-    where msbuild
-  displayName: 'find MSBuild'
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    mkdir build
-    cd build
-    cmake ^
-      -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
-      -DFRONT_END=qt ^
-      -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake\Qt5Gui ^
-      -Tllvm ^
-      ..
-    cmake --build .
+# - script: |
+#     pip install aqtinstall
+#     C:
+#     cd \
+#     python -m aqt 5.11.3 windows desktop win64_msvc2017_64
+#   displayName: 'install qt'
+# - script: |
+#     set
+#     dir C:\Qt5.11.3\5.11.3
+#     dir "C:/Program Files/Boost/1.69.0"
+#     dir "C:/Program Files/Boost/1.69.0/lib"
+#     dir "C:/Program Files/Boost/1.69.0/libs"
+#     dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
+#   displayName: 'show dirs'
+# - script: |
+#     choco install llvm ninja winflexbison3 --yes
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%
+#     clang-cl --version    
+#   displayName: 'install llvm, ninja, bison'
+# - script: |
+#     vcpkg install sdl2
+#   displayName: 'vcpkg install'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     dir C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
+#     where msbuild
+#   displayName: 'find MSBuild'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     mkdir build
+#     cd build
+#     cmake ^
+#       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
+#       -DFRONT_END=qt ^
+#       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake\Qt5Gui ^
+#       -Tllvm ^
+#       ..
+#     cmake --build .
 
 #   displayName: 'cmake'
 # # - script: |
@@ -175,14 +179,15 @@ steps:
 
 # #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
 
-- script: |
-    c:
-    cd %temp%
-    curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
-    Collect.exe
+# - script: |
+#     c:
+#     cd %temp%
+#     curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+#     Collect.exe
+#   displayName: 'vslogs collect'
 
-- task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'vslogs.zip'
-    targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'vslogs'
+#     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
