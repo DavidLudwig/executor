@@ -195,3 +195,7 @@ steps:
 #     artifactName: 'vslogs'
 #     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'buildfiles'
+    targetPath: '$(BUILD_SOURCESDIRECTORY)'
