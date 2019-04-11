@@ -28,20 +28,20 @@ steps:
 #     Echo Success: this script is running elevated.
 #   displayName: 'privilege check'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where curl
-    cd %temp%
-    cd
-    curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/LLVMExtensions/vsextensions/llvm-toolchain/latest/vspackage -o llvm.vsix
-    set INSTALL_ME="%temp%\llvm.vsix"
-    echo %INSTALL_ME%
-    dir %INSTALL_ME%
-    where VSIXInstaller
-    VSIXInstaller /quiet /admin %INSTALL_ME%
-    echo Done with VSIXInstaller
-    dir %temp%
-  displayName: 'install llvm.vsix'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where curl
+#     cd %temp%
+#     cd
+#     curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/LLVMExtensions/vsextensions/llvm-toolchain/latest/vspackage -o llvm.vsix
+#     set INSTALL_ME="%temp%\llvm.vsix"
+#     echo %INSTALL_ME%
+#     dir %INSTALL_ME%
+#     where VSIXInstaller
+#     VSIXInstaller /quiet /admin %INSTALL_ME%
+#     echo Done with VSIXInstaller
+#     dir %temp%
+#   displayName: 'install llvm.vsix'
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
@@ -68,27 +68,31 @@ steps:
 #     artifactName: 'vslogs.zip'
 #     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    dir "%temp%"
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools"
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\"
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
-  displayName: 'dir for stuff'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     dir "%temp%"
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools"
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\"
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+#   displayName: 'dir for stuff'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    c:
-    cd
-    cd "C:\Program Files (x86)\Microsoft Visual Studio\"
-    cd
-    dir stdio.h /s
-    dir optional /s
-  displayName: 'dir for c++ headers'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     c:
+#     cd
+#     cd "C:\Program Files (x86)\Microsoft Visual Studio\"
+#     cd
+#     dir stdio.h /s
+#     dir optional /s
+#   displayName: 'dir for c++ headers'
 
 - script: |
     cd
   displayName: 'get cd'
+
+- script: |
+    set
+  displayName: 'environment'
 
 # - script: |
 #     "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
