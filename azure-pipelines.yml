@@ -198,4 +198,4 @@ steps:
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'buildfiles'
-    targetPath: '$(BUILD_SOURCESDIRECTORY)'
+    targetPath: '%BUILD_SOURCESDIRECTORY%'
