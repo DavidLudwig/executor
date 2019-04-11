@@ -16,6 +16,18 @@ steps:
 #     dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
 #   displayName: 'dir for stuff'
 
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    c:
+    cd c:\
+    cd
+    dir
+    where perl
+    where bison
+    dir /s "C:\MinGW"
+  displayName: 'look for stuff'
+
+
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
 #     c:
@@ -45,68 +57,68 @@ steps:
 #     --wait
 #   displayName: 'install MSVC'
 
-- script: |
-    pip install aqtinstall
-    C:
-    cd \
-    python -m aqt 5.11.3 windows desktop win64_msvc2017_64
-  displayName: 'install qt'
-- script: |
-    set
-    dir C:\Qt5.11.3\5.11.3
-    dir "C:/Program Files/Boost/1.69.0"
-    dir "C:/Program Files/Boost/1.69.0/lib"
-    dir "C:/Program Files/Boost/1.69.0/libs"
-    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-  displayName: 'show dirs'
+# - script: |
+#     pip install aqtinstall
+#     C:
+#     cd \
+#     python -m aqt 5.11.3 windows desktop win64_msvc2017_64
+#   displayName: 'install qt'
+# - script: |
+#     set
+#     dir C:\Qt5.11.3\5.11.3
+#     dir "C:/Program Files/Boost/1.69.0"
+#     dir "C:/Program Files/Boost/1.69.0/lib"
+#     dir "C:/Program Files/Boost/1.69.0/libs"
+#     dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
+#   displayName: 'show dirs'
 
-- script: |
-    choco install llvm ninja winflexbison3 --yes
-    set PATH=C:\Program Files\LLVM\bin;%PATH%
-    clang-cl --version    
-  displayName: 'install llvm, ninja, bison'
+# - script: |
+#     choco install llvm winflexbison3 --yes
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%
+#     clang-cl --version    
+#   displayName: 'install llvm, bison'
 
-- script: |
-    choco install llvm --yes
-    where clang-cl
-    set PATH=C:\Program Files\LLVM\bin;%PATH%
-    where clang-cl
-    clang-cl --version
-  displayName: 'install llvm'
+# - script: |
+#     choco install llvm --yes
+#     where clang-cl
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%
+#     where clang-cl
+#     clang-cl --version
+#   displayName: 'install llvm'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where curl
-    c:
-    cd %temp%
-    cd
-    curl -o llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
-    set INSTALL_ME="%temp%\llvm.vsix"
-    echo %INSTALL_ME%
-    dir %INSTALL_ME%
-    where VSIXInstaller
-    start /wait VSIXInstaller /quiet /admin %INSTALL_ME%
-    echo Done with VSIXInstaller
-    dir %temp%
-  displayName: 'install llvm.vsix'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where curl
+#     c:
+#     cd %temp%
+#     cd
+#     curl -o llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
+#     set INSTALL_ME="%temp%\llvm.vsix"
+#     echo %INSTALL_ME%
+#     dir %INSTALL_ME%
+#     where VSIXInstaller
+#     start /wait VSIXInstaller /quiet /admin %INSTALL_ME%
+#     echo Done with VSIXInstaller
+#     dir %temp%
+#   displayName: 'install llvm.vsix'
 
-- script: |
-    vcpkg install sdl2
-  displayName: 'vcpkg install'
+# - script: |
+#     vcpkg install sdl2
+#   displayName: 'vcpkg install'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    mkdir build
-    cd build
-    cmake ^
-      -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
-      -DFRONT_END=qt ^
-      -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake\Qt5Gui ^
-      -Tllvm ^
-      ..
-    cmake --build .
-  displayName: 'configure and build'
-  # continueOnError: true
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     mkdir build
+#     cd build
+#     cmake ^
+#       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
+#       -DFRONT_END=qt ^
+#       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake\Qt5Gui ^
+#       -Tllvm ^
+#       ..
+#     cmake --build .
+#   displayName: 'configure and build'
+#   # continueOnError: true
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
