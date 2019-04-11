@@ -174,3 +174,15 @@ steps:
 # #     cmake --build .
 
 # #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
+
+- script: |
+    c:
+    cd %temp%
+    curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+    Collect.exe
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'vslogs.zip'
+    targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
+
