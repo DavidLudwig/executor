@@ -9,14 +9,16 @@ steps:
   submodules: true
 
 - script: |
+    dir
+    dir C:\Qt5.11.3\5.11.3
+  displayName: 'debug-logging'
+
     # set
-    # dir C:\Qt5.11.3\5.11.3
+    # dir /s "C:/Program Files/Boost/1.69.0/*.cmake"
     # dir "C:/Program Files/Boost/1.69.0"
     # dir "C:/Program Files/Boost/1.69.0/lib"
     # dir "C:/Program Files/Boost/1.69.0/libs"
     # dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-    dir /s "C:/Program Files/Boost/1.69.0/*.cmake"
-  displayName: 'debug-logging'
 
 
 # - script: |
