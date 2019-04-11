@@ -61,17 +61,30 @@ steps:
     dir Collect.exe
     Collect.exe
     echo Done Collecting
-    cd %temp%
-    cd
-    dir
+    dir %temp%
+
+steps:
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'vslogs.zip'
+    targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    dir "%temp%"
+    dir "c:\minVS"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\"
     dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
-    dir "C:\minVS"
   displayName: 'dir for stuff'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    cd "C:\Program Files (x86)\Microsoft Visual Studio\"
+    cd
+    dir stdio.h /s
+    dir optional /s
+  displayName: 'dir for c++ headers'
 
 # - script: |
 #     "c:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" ^
