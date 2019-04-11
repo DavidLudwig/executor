@@ -63,7 +63,6 @@ steps:
     echo Done Collecting
     dir %temp%
 
-steps:
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'vslogs.zip'
