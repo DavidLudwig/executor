@@ -10,21 +10,6 @@ steps:
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     where curl
-#     cd %temp%
-#     cd
-#     curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/LLVMExtensions/vsextensions/llvm-toolchain/latest/vspackage -o llvm.vsix
-#     set INSTALL_ME="%temp%\llvm.vsix"
-#     echo %INSTALL_ME%
-#     dir %INSTALL_ME%
-#     where VSIXInstaller
-#     VSIXInstaller /quiet /admin %INSTALL_ME%
-#     echo Done with VSIXInstaller
-#     dir %temp%
-#   displayName: 'install llvm.vsix'
-
-# - script: |
-#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
 #     dir "%temp%"
 #     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools"
 #     dir "C:\Program Files (x86)\Microsoft Visual Studio\"
@@ -74,11 +59,34 @@ steps:
 #     dir "C:/Program Files/Boost/1.69.0/libs"
 #     dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
 #   displayName: 'show dirs'
+
 # - script: |
 #     choco install llvm ninja winflexbison3 --yes
 #     set PATH=C:\Program Files\LLVM\bin;%PATH%
 #     clang-cl --version    
 #   displayName: 'install llvm, ninja, bison'
+
+- script: |
+    choco install llvm --yes
+    set PATH=C:\Program Files\LLVM\bin;%PATH%
+    clang-cl --version
+  displayName: 'install llvm'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    where curl
+    cd %temp%
+    cd
+    curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/LLVMExtensions/vsextensions/llvm-toolchain/latest/vspackage -o llvm.vsix
+    set INSTALL_ME="%temp%\llvm.vsix"
+    echo %INSTALL_ME%
+    dir %INSTALL_ME%
+    where VSIXInstaller
+    VSIXInstaller /quiet /admin %INSTALL_ME%
+    echo Done with VSIXInstaller
+    dir %temp%
+  displayName: 'install llvm.vsix'
+
 # - script: |
 #     vcpkg install sdl2
 #   displayName: 'vcpkg install'
@@ -105,7 +113,7 @@ steps:
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     mkdir build
     cd build
-    cmake ..
+    cmake -Tllvm ..
   displayName: 'cmake test'
   continueOnError: true
 
