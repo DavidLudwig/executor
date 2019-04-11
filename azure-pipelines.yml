@@ -8,21 +8,6 @@ steps:
 - checkout: self
   submodules: true
 
-- script: |
-    c:
-    cd c:\
-    dir
-    dir C:\Qt5.11.3\5.11.3
-  displayName: 'debug-logging'
-
-    # set
-    # dir /s "C:/Program Files/Boost/1.69.0/*.cmake"
-    # dir "C:/Program Files/Boost/1.69.0"
-    # dir "C:/Program Files/Boost/1.69.0/lib"
-    # dir "C:/Program Files/Boost/1.69.0/libs"
-    # dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-
-
 # - script: |
 #     c:
 #     cd c:\
@@ -57,12 +42,19 @@ steps:
 #     where bison
 #   displayName: 'debug-logging'
 
-# - script: |
-#     pip install aqtinstall
-#     C:
-#     cd \
-#     python -m aqt 5.11.3 windows desktop win64_msvc2017_64
-#   displayName: 'install qt'
+- script: |
+    pip install aqtinstall
+    C:
+    cd \
+    python -m aqt 5.11.3 windows desktop win64_msvc2017_64
+  displayName: 'install qt'
+
+- script: |
+    c:
+    cd c:\
+    dir
+    dir C:\Qt5.11.3\5.11.3
+  displayName: 'debug-logging'
 
 # # - script: |
 # #     set
