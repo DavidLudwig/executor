@@ -17,7 +17,27 @@ steps:
 #   displayName: 'dir for stuff'
 
 - script: |
+    c:
+    cd c:\
+    mkdir c:\MinGW
+    cd c:\MinGW
+    cd
+    curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
+    dir
+    unzip mingw-get
+    dir
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    where mingw-get
+    where perl
+    where bison
+    mingw-get install msys-bison-bin msys-perl-bin
+    where perl
+    where bison
+  displayName: 'install perl, bison'
+
+- script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     c:
     cd c:\
     cd
@@ -28,14 +48,6 @@ steps:
     where perl
     @echo Finding Bison
     where bison
-    @echo Listing MinGW 1
-    dir "C:\MinGW"
-    @echo Listing MinGW 2
-    dir "C:\tools\MinGW"
-    @echo Listing MinGW 3
-    dir "C:\Program Files\MinGW"
-    @echo Listing MinGW 4
-    dir "C:\Program Files (x86)\MinGW"
   displayName: 'look for stuff'
 
 
@@ -97,19 +109,19 @@ steps:
 #     clang-cl --version
 #   displayName: 'install llvm'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    where curl
-    where VSIXInstaller
-  displayName: 'locate stuff'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where curl
+#     where VSIXInstaller
+#   displayName: 'locate stuff'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
-    dir %TEMP%\llvm.vsix
-    start /wait VSIXInstaller /quiet /admin %TEMP%\llvm.vsix
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
-  displayName: 'install llvm.vsix'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
+#     dir %TEMP%\llvm.vsix
+#     start /wait VSIXInstaller /quiet /admin %TEMP%\llvm.vsix
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
+#   displayName: 'install llvm.vsix'
 
 # - script: |
 #     vcpkg install sdl2
@@ -117,6 +129,9 @@ steps:
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     where perl
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+#     where perl
 #     mkdir build
 #     cd build
 #     cmake ^
@@ -132,7 +147,7 @@ steps:
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
 #     where clang-cl
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
 #     where clang-cl
 #     mkdir build
 #     cd build
