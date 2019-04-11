@@ -98,6 +98,8 @@ steps:
       -Tllvm ^
       ..
     cmake --build .
+  displayName: 'configure and build'
+  continueOnError: true
 
 #   displayName: 'cmake'
 # # - script: |
