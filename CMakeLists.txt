@@ -36,6 +36,13 @@ endif()
 
 enable_testing()
 
+message("DEBUG VARS 1:")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
 add_library(lmdb
     lmdb/libraries/liblmdb/lmdb.h lmdb/libraries/liblmdb/mdb.c
     lmdb/libraries/liblmdb/midl.h lmdb/libraries/liblmdb/midl.c
@@ -64,4 +71,19 @@ add_subdirectory(syn68k)
 add_subdirectory(PowerCore)
 add_subdirectory(cxmon)
 add_subdirectory(src)
+
+message("DEBUG VARS 2:")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
 add_subdirectory(tests)
+
+message("DEBUG VARS 3:")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
