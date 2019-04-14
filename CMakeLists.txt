@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD 17)
 cmake_policy(SET CMP0020 NEW) # Automatically link Qt executables to qtmain target on Windows.
 cmake_policy(SET CMP0074 NEW) # don't ignore _ROOT variables (Boost_ROOT)
 
+set(CMAKE_VS_GLOBALS "SpectreMitigation=false")
+
 if(WIN32)
     add_compile_options(
         # Prevent currently-non-compiling assembly functions from being included 
