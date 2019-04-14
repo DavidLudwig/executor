@@ -65,14 +65,17 @@ steps:
 #     dir /s *cmake
 #   displayName: 'debug-logging'
 
-# # - script: |
-# #     set
-# #     dir C:\Qt5.11.3\5.11.3
-# #     dir "C:/Program Files/Boost/1.69.0"
-# #     dir "C:/Program Files/Boost/1.69.0/lib"
-# #     dir "C:/Program Files/Boost/1.69.0/libs"
-# #     dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-# #   displayName: 'debug-logging'
+- script: |
+    rem set
+    dir C:\
+    dir C:\Qt5.11.3
+    dir C:\Qt5.11.3\5.11.3
+    dir /s C:\Qt5.11.3\5.11.3\*.dll
+    dir "C:/Program Files/Boost/1.69.0"
+    dir "C:/Program Files/Boost/1.69.0/lib"
+    dir "C:/Program Files/Boost/1.69.0/libs"
+    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
+  displayName: 'debug-logging (find Qt stuff)'
 
 - script: |
     choco install llvm --yes
@@ -91,6 +94,17 @@ steps:
   displayName: 'install llvm.vsix'
 
 - script: |
+    c:
+    cd %temp%
+    curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+    Collect.exe
+  displayName: 'vslogs collect'
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'vslogs'
+    targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
+
+- script: |
     vcpkg install sdl2 boost-filesystem boost-system
   displayName: 'vcpkg install'
 
@@ -101,11 +115,11 @@ steps:
     mkdir build
     cd build
     cmake ^
+      -DCMAKE_BUILD_TYPE=Release ^
       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
       -DFRONT_END=qt ^
       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
-      -Tllvm ^
-      ..
+      -Tllvm ..
     cmake --build .
   displayName: 'configure and build'
   continueOnError: true
@@ -131,17 +145,6 @@ steps:
 # #     cmake --build .
 
 # #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
-
-# # - script: |
-# #     c:
-# #     cd %temp%
-# #     curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
-# #     Collect.exe
-# #   displayName: 'vslogs collect'
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'vslogs'
-# #     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
 - task: PublishPipelineArtifact@0
   inputs:
