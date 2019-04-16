@@ -64,16 +64,12 @@ if(CMAKE_SYSTEM_NAME MATCHES Retro.*)
     set_target_properties(tests PROPERTIES LINK_FLAGS "-Wl,-gc-sections")
 
 else()
-    set(INSTALL_GTEST FALSE CACHE BOOL "" FORCE)
-	set( gtest_force_shared_crt ON CACHE BOOL "Always use msvcrt.dll" FORCE)
-    include(GoogleTest)
-
+    find_package(GTest REQUIRED)
     add_executable(tests
         ${TEST_SOURCES}
         ${NATIVE_TEST_SOURCES}
         main_executor.cpp)
-    add_subdirectory(googletest)
-    target_link_libraries(tests gtest romlib)
+    target_link_libraries(tests GTest::GTest romlib)
     target_compile_definitions(tests PRIVATE -DEXECUTOR)
     if(CMAKE_COMPILER_IS_GNUCXX)
         target_compile_options(tests PRIVATE -Wno-multichar)
