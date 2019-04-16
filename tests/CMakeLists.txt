@@ -14,7 +14,7 @@ function(add_compilefail_tests filename)
         add_library(${target} EXCLUDE_FROM_ALL ${filename})
         target_compile_definitions(${target} PRIVATE -DCOMPILEFAIL -DCOMPILEFAIL_${testcase})
 
-        target_link_libraries(${target} gtest romlib)
+        target_link_libraries(${target} GTest::GTest romlib)
         target_compile_definitions(${target} PRIVATE -DEXECUTOR)
     
         add_test(NAME ${base}.${testcase}
@@ -27,7 +27,7 @@ function(add_compilefail_tests filename)
     add_library(${target} EXCLUDE_FROM_ALL ${filename})
     target_compile_definitions(${target} PRIVATE -DCOMPILEFAIL)
 
-    target_link_libraries(${target} gtest romlib)
+    target_link_libraries(${target} GTest::GTest romlib)
     target_compile_definitions(${target} PRIVATE -DEXECUTOR)
 
     add_test(NAME ${base}_preamble
