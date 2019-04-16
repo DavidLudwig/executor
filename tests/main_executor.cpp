@@ -77,10 +77,12 @@ public:
         traps::init(false);
 
         PowerCore& cpu = getPowerCore();
+#if SIZEOF_CHAR_P == 8
         cpu.memoryBases[0] = (void*)ROMlib_offsets[0];
         cpu.memoryBases[1] = (void*)ROMlib_offsets[1];
         cpu.memoryBases[2] = (void*)ROMlib_offsets[2];
         cpu.memoryBases[3] = (void*)ROMlib_offsets[3];
+#endif
         
         LM(ResErrProc) = 0;
         InitResources();
