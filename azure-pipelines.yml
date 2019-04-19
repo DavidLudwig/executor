@@ -105,7 +105,7 @@ steps:
     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
 - script: |
-    vcpkg install sdl2 boost-filesystem boost-system
+    vcpkg install sdl2 boost-filesystem boost-system gtest
   displayName: 'vcpkg install'
 
 - script: |
