@@ -105,7 +105,7 @@ steps:
     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
 - script: |
-    vcpkg install sdl2 boost-filesystem boost-system gtest
+    vcpkg install sdl2 boost-filesystem boost-system
   displayName: 'vcpkg install'
 
 - script: |
@@ -120,9 +120,27 @@ steps:
       -DFRONT_END=qt ^
       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
       -Tllvm ..
-    cmake --build .
-  displayName: 'configure and build'
+  displayName: 'cmake configure'
   continueOnError: true
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set Boost_ROOT=
+    cd build
+    cmake --build . --target executor
+  displayName: 'cmake build, executor.exe'
+  continueOnError: true
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set Boost_ROOT=
+    cd build
+    cmake --build . --target tests
+  displayName: 'cmake build, tests.exe'
+  continueOnError: true
+
 
   # C:\Qt5.11.3\5.11.3\msvc2015
   # C:\Qt5.11.3\5.11.3\msvc2017_64
