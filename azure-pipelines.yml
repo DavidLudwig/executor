@@ -5,6 +5,10 @@ trigger:
 pool:
   vmImage: 'vs2017-win2016'
 
+variables:
+  configuration: Debug
+# platform: x64
+
 steps:
 - checkout: self
   submodules: true
@@ -116,7 +120,7 @@ steps:
     mkdir build
     cd build
     cmake ^
-      -DCMAKE_BUILD_TYPE=Release ^
+      -DCMAKE_BUILD_TYPE=$(Configuration) ^
       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
       -DFRONT_END=qt ^
       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
@@ -129,7 +133,7 @@ steps:
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     set Boost_ROOT=
     cd build
-    cmake --build . -—config Debug --target executor
+    cmake --build . -—config $(Configuration) --target executor
   displayName: 'cmake build, executor.exe'
   continueOnError: true
 
@@ -138,7 +142,7 @@ steps:
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     set Boost_ROOT=
     cd build
-    cmake --build . -—config Debug --target tests
+    cmake --build . -—config $(Configuration) --target tests
   displayName: 'cmake build, tests.exe'
   continueOnError: true
 
