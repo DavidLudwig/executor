@@ -52,25 +52,6 @@ steps:
   displayName: 'debug-logging'
 
 - script: |
-    pip install aqtinstall
-    C:
-    cd \
-    python -m aqt 5.11.3 windows desktop win32_msvc2015
-  displayName: 'install qt'
-
-- script: |
-    rem set
-    dir C:\
-    dir C:\Qt5.11.3
-    dir C:\Qt5.11.3\5.11.3
-    dir /s C:\Qt5.11.3\5.11.3\*.dll
-    dir "C:/Program Files/Boost/1.69.0"
-    dir "C:/Program Files/Boost/1.69.0/lib"
-    dir "C:/Program Files/Boost/1.69.0/libs"
-    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-  displayName: 'debug-logging (find Qt stuff)'
-
-- script: |
     choco install llvm --yes
     where clang-cl
     set PATH=C:\Program Files\LLVM\bin;%PATH%
@@ -114,6 +95,25 @@ steps:
   inputs:
     artifactName: 'llvm-msbuild'
     targetPath: 'C:/llvm-src/tools/msbuild'
+
+- script: |
+    pip install aqtinstall
+    C:
+    cd \
+    python -m aqt 5.11.3 windows desktop win32_msvc2015
+  displayName: 'install qt'
+
+- script: |
+    rem set
+    dir C:\
+    dir C:\Qt5.11.3
+    dir C:\Qt5.11.3\5.11.3
+    dir /s C:\Qt5.11.3\5.11.3\*.dll
+    dir "C:/Program Files/Boost/1.69.0"
+    dir "C:/Program Files/Boost/1.69.0/lib"
+    dir "C:/Program Files/Boost/1.69.0/libs"
+    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
+  displayName: 'debug-logging (find Qt stuff)'
 
 - script: |
     vcpkg install sdl2 boost-filesystem boost-system gtest
