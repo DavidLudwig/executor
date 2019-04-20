@@ -49,7 +49,7 @@ steps:
     c:
     cd c:\
     dir
-    git clone --verbose https://github.com/llvm-mirror/llvm
+    git clone --depth 1 --verbose https://github.com/llvm-mirror/llvm
     cd llvm\tools\msbuild
     where perl
     perl --version
