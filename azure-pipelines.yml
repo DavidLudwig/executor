@@ -59,10 +59,15 @@ steps:
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
   displayName: 'install llvm+MSVC integration'
 
-- task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'llvm-msbuild'
-    targetPath: 'C:/llvm/tools/msbuild'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'llvm-msbuild'
+#     targetPath: 'C:/llvm/tools/msbuild'
+
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'VCTargets'
+#     targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
 
 - script: |
     c:
@@ -192,8 +197,3 @@ steps:
   inputs:
     artifactName: 'BuildDirectory'
     targetPath: 'D:/a/1/s/build'
-
-- task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'VCTargets'
-    targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
