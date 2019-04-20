@@ -58,18 +58,6 @@ steps:
     python -m aqt 5.11.3 windows desktop win32_msvc2015
   displayName: 'install qt'
 
-# - script: |
-#     c:
-#     cd c:\
-#     dir
-#     dir C:\Qt5.11.3\5.11.3\msvc2017_64
-#     dir C:\Qt5.11.3\5.11.3\msvc2017_64\lib
-#     dir C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake
-#     cd C:\Qt5.11.3\5.11.3\msvc2017_64
-#     cd
-#     dir /s *cmake
-#   displayName: 'debug-logging'
-
 - script: |
     rem set
     dir C:\
