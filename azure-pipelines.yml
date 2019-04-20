@@ -18,14 +18,6 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
-    tree /a "C:\Program Files"
-  displayName: 'tree C:\Program Files'
-
-- script: |
-    tree /a "C:\Program Files (x86)"
-  displayName: 'tree C:\Program Files (x86)'
-
-- script: |
     choco install llvm --yes
     where clang-cl
     set PATH=C:\Program Files\LLVM\bin;%PATH%
