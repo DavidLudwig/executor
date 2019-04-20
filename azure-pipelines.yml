@@ -81,12 +81,10 @@ steps:
     dir
     set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     where mingw-get
-    where perl
     where bison
-    mingw-get install msys-bison-bin msys-perl-bin
-    where perl
+    mingw-get install msys-bison-bin
     where bison
-  displayName: 'install perl, bison'
+  displayName: 'install bison'
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
