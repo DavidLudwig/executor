@@ -18,40 +18,6 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
-    c:
-    cd c:\
-    mkdir c:\MinGW
-    cd c:\MinGW
-    cd
-    curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
-    dir
-    unzip mingw-get
-    dir
-    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    where mingw-get
-    where perl
-    where bison
-    mingw-get install msys-bison-bin msys-perl-bin
-    where perl
-    where bison
-  displayName: 'install perl, bison'
-
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    c:
-    cd c:\
-    cd
-    dir
-    @echo Log PATH
-    echo %PATH%
-    @echo Finding Perl
-    where perl
-    @echo Finding Bison
-    where bison
-  displayName: 'debug-logging'
-
-- script: |
     choco install llvm --yes
     where clang-cl
     set PATH=C:\Program Files\LLVM\bin;%PATH%
@@ -85,6 +51,8 @@ steps:
     dir
     git clone --verbose https://github.com/llvm-mirror/llvm
     cd llvm\tools\msbuild
+    where perl
+    perl --version
     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
     dir
     call install.bat
@@ -95,6 +63,40 @@ steps:
   inputs:
     artifactName: 'llvm-msbuild'
     targetPath: 'C:/llvm/tools/msbuild'
+
+- script: |
+    c:
+    cd c:\
+    mkdir c:\MinGW
+    cd c:\MinGW
+    cd
+    curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
+    dir
+    unzip mingw-get
+    dir
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    where mingw-get
+    where perl
+    where bison
+    mingw-get install msys-bison-bin msys-perl-bin
+    where perl
+    where bison
+  displayName: 'install perl, bison'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    c:
+    cd c:\
+    cd
+    dir
+    @echo Log PATH
+    echo %PATH%
+    @echo Finding Perl
+    where perl
+    @echo Finding Bison
+    where bison
+  displayName: 'debug-logging'
 
 - script: |
     pip install aqtinstall
