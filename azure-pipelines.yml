@@ -82,7 +82,7 @@ steps:
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
     dir %TEMP%\llvm.vsix
-    start /wait VSIXInstaller /quiet /admin %TEMP%\llvm.vsix
+    start /wait VSIXInstaller /quiet /admin /norepair %TEMP%\llvm.vsix
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
   displayName: 'install llvm.vsix'
 
