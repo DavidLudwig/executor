@@ -177,10 +177,21 @@ steps:
 
 # #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
 
+
+- script: |
+    tree /f /a build
+  displayName: 'log build directory contents'
+  continueOnError: true
+
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'RepoPostBuild'
+#     targetPath: 'D:/a/1/s'
+
 - task: PublishPipelineArtifact@0
   inputs:
-    artifactName: 'buildfiles'
-    targetPath: 'D:/a/1/s'
+    artifactName: 'BuildDirectory'
+    targetPath: 'D:/a/1/s/build'
 
 - task: PublishPipelineArtifact@0
   inputs:
