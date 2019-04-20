@@ -83,8 +83,8 @@ steps:
     c:
     cd c:\
     dir
-    git clone --verbose git://github.com/llvm-mirrors/llvm.git llvm-src
-    cd llvm-src\tools\msbuild
+    git clone --verbose https://github.com/llvm-mirror/llvm
+    cd llvm\tools\msbuild
     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
     dir
     call install.bat
@@ -94,7 +94,7 @@ steps:
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'llvm-msbuild'
-    targetPath: 'C:/llvm-src/tools/msbuild'
+    targetPath: 'C:/llvm/tools/msbuild'
 
 - script: |
     pip install aqtinstall
