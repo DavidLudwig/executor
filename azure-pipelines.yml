@@ -78,24 +78,42 @@ steps:
     clang-cl --version
   displayName: 'install llvm'
 
-- script: |
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
-    dir %TEMP%\llvm.vsix
-    start /wait VSIXInstaller /quiet /admin /norepair %TEMP%\llvm.vsix
-    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
-  displayName: 'install llvm.vsix'
+# - script: |
+#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+#     curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
+#     dir %TEMP%\llvm.vsix
+#     start /wait VSIXInstaller /quiet /admin /norepair %TEMP%\llvm.vsix
+#     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
+#   displayName: 'install llvm.vsix'
+
+# - script: |
+#     c:
+#     cd %temp%
+#     curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+#     Collect.exe
+#   displayName: 'vslogs collect'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'vslogs'
+#     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
 - script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     c:
-    cd %temp%
-    curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
-    Collect.exe
-  displayName: 'vslogs collect'
+    cd c:\
+    dir
+    git clone https://github.com/llvm-mirrors/llvm llvm-src
+    cd llvm-src\tools\msbuild
+    perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
+    dir
+    call install.bat
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
+  displayName: 'install llvm+MSVC integration'
+
 - task: PublishPipelineArtifact@0
   inputs:
-    artifactName: 'vslogs'
-    targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
+    artifactName: 'llvm-msbuild'
+    targetPath: 'C:/llvm-src/tools/msbuild'
 
 - script: |
     vcpkg install sdl2 boost-filesystem boost-system gtest
