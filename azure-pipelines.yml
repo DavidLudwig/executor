@@ -102,7 +102,7 @@ steps:
     c:
     cd c:\
     dir
-    git clone git@github.com:llvm-mirrors/llvm llvm-src
+    git clone --verbose git://github.com/llvm-mirrors/llvm.git llvm-src
     cd llvm-src\tools\msbuild
     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
     dir
