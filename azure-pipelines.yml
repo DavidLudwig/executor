@@ -102,7 +102,7 @@ steps:
     c:
     cd c:\
     dir
-    git clone https://github.com/llvm-mirrors/llvm llvm-src
+    git clone git@github.com:llvm-mirrors/llvm llvm-src
     cd llvm-src\tools\msbuild
     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
     dir
@@ -110,10 +110,10 @@ steps:
     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
   displayName: 'install llvm+MSVC integration'
 
-# - task: PublishPipelineArtifact@0
-#   inputs:
-#     artifactName: 'llvm-msbuild'
-#     targetPath: 'C:/llvm-src/tools/msbuild'
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'llvm-msbuild'
+    targetPath: 'C:/llvm-src/tools/msbuild'
 
 - script: |
     vcpkg install sdl2 boost-filesystem boost-system gtest
