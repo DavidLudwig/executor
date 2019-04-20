@@ -121,7 +121,7 @@ steps:
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     set Boost_ROOT=
     cd build
-    cmake --build . --target executor -—config $(Configuration)
+    cmake --build . --target executor
   displayName: 'cmake build, executor.exe'
   continueOnError: true
 
@@ -130,7 +130,7 @@ steps:
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
     set Boost_ROOT=
     cd build
-    cmake --build . --target tests -—config $(Configuration)
+    cmake --build . --target tests
   displayName: 'cmake build, tests.exe'
   continueOnError: true
 
