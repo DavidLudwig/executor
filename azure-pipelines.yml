@@ -18,7 +18,7 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
-    tree /a /f "C:\Program Files\Git\mingw64\bin"
+    tree /a /f "C:\Program Files\Git\mingw64"
   displayName: 'log pre-installed mingw contents'
 
 - script: |
