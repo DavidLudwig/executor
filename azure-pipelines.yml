@@ -18,6 +18,10 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
+    tree /a /f "C:\Program Files\Git\mingw64\bin"
+  displayName: 'log pre-installed mingw contents'
+
+- script: |
     choco install llvm --yes
     where clang-cl
     set PATH=C:\Program Files\LLVM\bin;%PATH%
