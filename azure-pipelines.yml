@@ -196,7 +196,12 @@ steps:
 #     artifactName: 'RepoPostBuild'
 #     targetPath: 'D:/a/1/s'
 
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'BuildDirectory'
+#     targetPath: 'D:/a/1/s/build'
+
 - task: PublishPipelineArtifact@0
   inputs:
-    artifactName: 'BuildDirectory'
-    targetPath: 'D:/a/1/s/build'
+    artifactName: 'BuildSubDir'
+    targetPath: 'D:/a/1/s/build/$(Configuration)'
