@@ -22,12 +22,14 @@ steps:
   displayName: 'search through preinstalled Boost, 0'
 
 - script: |
-    dir /s "C:\Program Files\Boost\1.69.0\*lib”
+    dir /s "C:\Program Files\Boost\*.lib”
   displayName: 'search through preinstalled Boost, 1'
+  continueOnError: true
 
 - script: |
-    dir /s "C:\Program Files\Boost\1.69.0\*dll"
+    dir /s "C:\Program Files\Boost\1.69.0\*.dll"
   displayName: 'search through preinstalled Boost, 2'
+  continueOnError: true
 
 - script: |
     choco install llvm --yes
