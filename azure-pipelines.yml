@@ -221,5 +221,5 @@ steps:
 
 - task: PublishPipelineArtifact@0
   inputs:
-    artifactName: 'BuildSubDir'
+    artifactName: 'BuildMainSubDir'
     targetPath: 'D:/a/1/s/build/$(Configuration)'
