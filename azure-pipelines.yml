@@ -22,11 +22,11 @@ steps:
   displayName: 'search through preinstalled Boost, 0'
 
 - script: |
-    dir /s "C:\Program Files\Boost\1.69.0\*cmake"
+    dir /s "C:\Program Files\Boost\1.69.0\*lib”
   displayName: 'search through preinstalled Boost, 1'
 
 - script: |
-    dir /s "C:\Program Files\Boost\1.69.0\cmake"
+    dir /s "C:\Program Files\Boost\1.69.0\*dll"
   displayName: 'search through preinstalled Boost, 2'
 
 - script: |
