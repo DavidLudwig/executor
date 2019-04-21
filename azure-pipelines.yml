@@ -157,7 +157,7 @@ steps:
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
     set Boost_ROOT=
-    cd build
+    cd build/$(Configuration)
     where windeployqt
     windeployqt executor.exe
   displayName: 'windeployqt, executor.exe'
