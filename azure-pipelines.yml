@@ -49,8 +49,13 @@ steps:
     c:
     cd c:\
     dir
-    git clone --depth 1 --verbose https://github.com/llvm-mirror/llvm
-    cd llvm\tools\msbuild
+    rem git clone --depth 1 --verbose https://github.com/llvm-mirror/llvm
+    rem cd llvm\tools\msbuild
+    where svn
+    svn checkout --depth empty https://github.com/llvm-mirror/llvm/trunk llvm
+    cd llvm
+    svn update --set-depth infinity tools
+    cd tools/msbuild
     where perl
     perl --version
     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
