@@ -18,7 +18,7 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
-    dir "C:\Program Files\Boost\1.69.0"
+    tree /a /f "C:\Program Files\Boost\1.69.0"
   displayName: 'search through preinstalled Boost, 0'
 
 - script: |
