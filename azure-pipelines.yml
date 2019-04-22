@@ -13,220 +13,220 @@ steps:
 - checkout: self
   submodules: true
 
-# - script: |
-#     set
-#   displayName: 'log environment variables'
+- script: |
+    set
+  displayName: 'log environment variables'
 
-# - script: |
-#     choco install llvm --yes
-#     where clang-cl
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%
-#     where clang-cl
-#     clang-cl --version
-#   displayName: 'install llvm'
-
-# # - script: |
-# #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-# #     curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
-# #     dir %TEMP%\llvm.vsix
-# #     start /wait VSIXInstaller /quiet /admin /norepair %TEMP%\llvm.vsix
-# #     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
-# #   displayName: 'install llvm.vsix'
-
-# # - script: |
-# #     c:
-# #     cd %temp%
-# #     curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
-# #     Collect.exe
-# #   displayName: 'vslogs collect'
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'vslogs'
-# #     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
+- script: |
+    choco install llvm --yes
+    where clang-cl
+    set PATH=C:\Program Files\LLVM\bin;%PATH%
+    where clang-cl
+    clang-cl --version
+  displayName: 'install llvm'
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     c:
-#     cd c:\
-#     dir
-#     rem git clone --depth 1 --verbose https://github.com/llvm-mirror/llvm
-#     rem cd llvm\tools\msbuild
-#     where svn
-#     svn checkout --depth empty https://github.com/llvm-mirror/llvm/trunk llvm
-#     cd llvm
-#     svn update --set-depth infinity tools
-#     cd tools/msbuild
-#     where perl
-#     perl --version
-#     perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
-#     dir
-#     call install.bat
+#     curl -o %TEMP%\llvm.vsix https://llvmextensions.gallerycdn.vsassets.io/extensions/llvmextensions/llvm-toolchain/1.0.340780/1535663999089/llvm.vsix
+#     dir %TEMP%\llvm.vsix
+#     start /wait VSIXInstaller /quiet /admin /norepair %TEMP%\llvm.vsix
 #     dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
-#   displayName: 'install llvm+MSVC integration'
-
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'llvm-msbuild'
-# #     targetPath: 'C:/llvm/tools/msbuild'
-
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'VCTargets'
-# #     targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
+#   displayName: 'install llvm.vsix'
 
 # - script: |
 #     c:
-#     cd c:\
-#     mkdir c:\MinGW
-#     cd c:\MinGW
-#     cd
-#     curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
-#     dir
-#     unzip mingw-get
-#     dir
-#     set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-#     where mingw-get
-#     where bison
-#     mingw-get install msys-bison-bin
-#     where bison
-#   displayName: 'install bison'
+#     cd %temp%
+#     curl https://download.microsoft.com/download/8/3/4/834E83F6-C377-4DCE-A757-69A418B6C6DF/Collect.exe -o Collect.exe
+#     Collect.exe
+#   displayName: 'vslogs collect'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'vslogs'
+#     targetPath: 'C:/Users/VssAdministrator/AppData/Local/Temp/vslogs.zip'
 
-# - script: |
-#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-#     c:
-#     cd c:\
-#     cd
-#     dir
-#     @echo Log PATH
-#     echo %PATH%
-#     @echo Finding Perl
-#     where perl
-#     @echo Finding Bison
-#     where bison
-#   displayName: 'debug-logging'
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    c:
+    cd c:\
+    dir
+    rem git clone --depth 1 --verbose https://github.com/llvm-mirror/llvm
+    rem cd llvm\tools\msbuild
+    where svn
+    svn checkout --depth empty https://github.com/llvm-mirror/llvm/trunk llvm
+    cd llvm
+    svn update --set-depth infinity tools
+    cd tools/msbuild
+    where perl
+    perl --version
+    perl -i.orig -p -e 's/Professional/Enterprise/g' install.bat
+    dir
+    call install.bat
+    dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
+  displayName: 'install llvm+MSVC integration'
 
-# - script: |
-#     pip install aqtinstall
-#     C:
-#     cd \
-#     python -m aqt 5.11.3 windows desktop win32_msvc2015
-#   displayName: 'install qt'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'llvm-msbuild'
+#     targetPath: 'C:/llvm/tools/msbuild'
 
-# - script: |
-#     rem set
-#     dir C:\
-#     dir C:\Qt5.11.3
-#     dir C:\Qt5.11.3\5.11.3
-#     dir /s C:\Qt5.11.3\5.11.3\*.dll
-#     dir "C:/Program Files/Boost/1.69.0"
-#     dir "C:/Program Files/Boost/1.69.0/lib"
-#     dir "C:/Program Files/Boost/1.69.0/libs"
-#     dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
-#   displayName: 'debug-logging (find Qt stuff)'
+# - task: PublishPipelineArtifact@0
+#   inputs:
+#     artifactName: 'VCTargets'
+#     targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
 
-# - script: |
-#     vcpkg install sdl2 gtest
-#   displayName: 'vcpkg install'
+- script: |
+    c:
+    cd c:\
+    mkdir c:\MinGW
+    cd c:\MinGW
+    cd
+    curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
+    dir
+    unzip mingw-get
+    dir
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    where mingw-get
+    where bison
+    mingw-get install msys-bison-bin
+    where bison
+  displayName: 'install bison'
 
-# - script: |
-#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-#     mkdir build
-#     cd build
-#     cmake ^
-#       -DCMAKE_BUILD_TYPE=$(Configuration) ^
-#       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
-#       -DFRONT_END=qt ^
-#       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
-#       "-DBOOST_ROOT=C:\Program Files\Boost\1.69.0" ^
-#       "-DBOOST_LIBRARYDIR=C:\Program Files\Boost\1.69.0\lib" ^
-#       -DBOOST_COMPILER=-vc141 ^
-#       -Tllvm ..
-#   displayName: 'cmake configure'
-#   continueOnError: true
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    c:
+    cd c:\
+    cd
+    dir
+    @echo Log PATH
+    echo %PATH%
+    @echo Finding Perl
+    where perl
+    @echo Finding Bison
+    where bison
+  displayName: 'debug-logging'
 
-# - script: |
-#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-#     cd build
-#     msbuild Executor.sln -property:Configuration=$(Configuration) -target:executor
-#   displayName: 'msbuild, executor.exe'
-#   continueOnError: true
+- script: |
+    pip install aqtinstall
+    C:
+    cd \
+    python -m aqt 5.11.3 windows desktop win32_msvc2015
+  displayName: 'install qt'
+
+- script: |
+    rem set
+    dir C:\
+    dir C:\Qt5.11.3
+    dir C:\Qt5.11.3\5.11.3
+    dir /s C:\Qt5.11.3\5.11.3\*.dll
+    dir "C:/Program Files/Boost/1.69.0"
+    dir "C:/Program Files/Boost/1.69.0/lib"
+    dir "C:/Program Files/Boost/1.69.0/libs"
+    dir "C:/Program Files/Boost/1.69.0/include/boost-1_69"
+  displayName: 'debug-logging (find Qt stuff)'
+
+- script: |
+    vcpkg install sdl2 gtest
+  displayName: 'vcpkg install'
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    mkdir build
+    cd build
+    cmake ^
+      -DCMAKE_BUILD_TYPE=$(Configuration) ^
+      -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
+      -DFRONT_END=qt ^
+      -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
+      "-DBOOST_ROOT=C:\Program Files\Boost\1.69.0" ^
+      "-DBOOST_LIBRARYDIR=C:\Program Files\Boost\1.69.0\lib" ^
+      -DBOOST_COMPILER=-vc141 ^
+      -Tllvm ..
+  displayName: 'cmake configure'
+  continueOnError: true
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    cd build
+    msbuild Executor.sln -property:Configuration=$(Configuration) -target:executor
+  displayName: 'msbuild, executor.exe'
+  continueOnError: true
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
+    cd build/$(Configuration)
+    where windeployqt
+    windeployqt executor.exe
+  displayName: 'windeployqt, executor.exe'
+  continueOnError: true
+
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    cd build
+    msbuild Executor.sln -property:Configuration=$(Configuration) -target:tests
+  displayName: 'msbuild, tests.exe'
+  continueOnError: true
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
 #     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
-#     cd build/$(Configuration)
-#     where windeployqt
-#     windeployqt executor.exe
-#   displayName: 'windeployqt, executor.exe'
-#   continueOnError: true
-
-# - script: |
-#     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
 #     cd build
-#     msbuild Executor.sln -property:Configuration=$(Configuration) -target:tests
-#   displayName: 'msbuild, tests.exe'
-#   continueOnError: true
+#     where windeployqt
+#     windeployqt tests.exe
+#   displayName: 'windeployqt, tests.exe'
 
+
+  # C:\Qt5.11.3\5.11.3\msvc2015
+  # C:\Qt5.11.3\5.11.3\msvc2017_64
+
+#   displayName: 'cmake'
 # # - script: |
-# #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-# #     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
+# #     set PATH=C:\Program Files\LLVM\bin;%PATH%
+# #     call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+# #     mkdir build
 # #     cd build
-# #     where windeployqt
-# #     windeployqt tests.exe
-# #   displayName: 'windeployqt, tests.exe'
+# #     cmake -G Ninja ^
+# #       -DCMAKE_BUILD_TYPE=Release ^
+# #       -DCMAKE_C_COMPILER=clang-cl ^
+# #       -DCMAKE_CXX_COMPILER=clang-cl ^
+# #       -DFRONT_END=qt ^
+# #       -DBISON_COMMAND=win_bison ^
+# #       -DCMAKE_PREFIX_PATH=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake ^
+# #       -DBoost_COMPILER=-vc141 ^
+# #       ..
+# #     cmake --build .
+
+# #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
 
 
-#   # C:\Qt5.11.3\5.11.3\msvc2015
-#   # C:\Qt5.11.3\5.11.3\msvc2017_64
-
-# #   displayName: 'cmake'
-# # # - script: |
-# # #     set PATH=C:\Program Files\LLVM\bin;%PATH%
-# # #     call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
-# # #     mkdir build
-# # #     cd build
-# # #     cmake -G Ninja ^
-# # #       -DCMAKE_BUILD_TYPE=Release ^
-# # #       -DCMAKE_C_COMPILER=clang-cl ^
-# # #       -DCMAKE_CXX_COMPILER=clang-cl ^
-# # #       -DFRONT_END=qt ^
-# # #       -DBISON_COMMAND=win_bison ^
-# # #       -DCMAKE_PREFIX_PATH=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake ^
-# # #       -DBoost_COMPILER=-vc141 ^
-# # #       ..
-# # #     cmake --build .
-
-# # #       -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake 
-
-
-# - script: |
-#     tree /f /a build
-#   displayName: 'log build directory contents'
-#   continueOnError: true
-
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'RepoPostBuild'
-# #     targetPath: 'D:/a/1/s'
-
-# # - task: PublishPipelineArtifact@0
-# #   inputs:
-# #     artifactName: 'BuildDirectory'
-# #     targetPath: 'D:/a/1/s/build'
+- script: |
+    tree /f /a build
+  displayName: 'log build directory contents'
+  continueOnError: true
 
 # - task: PublishPipelineArtifact@0
 #   inputs:
-#     artifactName: 'BuildMainSubDir'
-#     targetPath: 'D:/a/1/s/build/$(Configuration)'
+#     artifactName: 'RepoPostBuild'
+#     targetPath: 'D:/a/1/s'
 
 # - task: PublishPipelineArtifact@0
 #   inputs:
-#     artifactName: 'CMakeModules'
-#     targetPath: 'C:/Program Files/CMake/share/cmake-3.14/Modules/'
+#     artifactName: 'BuildDirectory'
+#     targetPath: 'D:/a/1/s/build'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'BuildMainSubDir'
+    targetPath: 'D:/a/1/s/build/$(Configuration)'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'CMakeModules'
+    targetPath: 'C:/Program Files/CMake/share/cmake-3.14/Modules/'
 
 - task: PublishPipelineArtifact@0
   inputs:
