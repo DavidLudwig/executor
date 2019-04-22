@@ -8,7 +8,21 @@ if(NOT BISON_COMMAND)
     message(FATAL_ERROR "Cannot find command: 'bison' (needed for building!)")
 endif()
 
+message("DEBUG VARS 1:")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
 find_package(Boost REQUIRED COMPONENTS filesystem system)
+
+message("DEBUG VARS 2:")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
 
 find_package(Threads REQUIRED)
 
