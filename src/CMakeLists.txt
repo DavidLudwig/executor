@@ -15,6 +15,7 @@ foreach (_variableName ${_variableNames})
     message(STATUS "${_variableName}=${${_variableName}}")
 endforeach()
 
+cmake_policy(SET CMP0074 NEW) # don't ignore _ROOT variables (Boost_ROOT)
 find_package(Boost REQUIRED COMPONENTS filesystem system)
 
 message("DEBUG VARS 2:")
