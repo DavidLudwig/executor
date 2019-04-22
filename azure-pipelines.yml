@@ -161,6 +161,7 @@ steps:
     where windeployqt
     windeployqt executor.exe
   displayName: 'windeployqt, executor.exe'
+  continueOnError: true
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
