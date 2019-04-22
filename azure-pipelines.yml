@@ -18,18 +18,6 @@ steps:
   displayName: 'log environment variables'
 
 - script: |
-    dir "C:\Program Files\Boost\1.69.0"
-  displayName: 'search through preinstalled Boost, 0'
-
-- script: |
-    dir /s "C:\Program Files\Boost\1.69.0\*cmake"
-  displayName: 'search through preinstalled Boost, 1'
-
-- script: |
-    dir /s "C:\Program Files\Boost\1.69.0\cmake"
-  displayName: 'search through preinstalled Boost, 2'
-
-- script: |
     choco install llvm --yes
     where clang-cl
     set PATH=C:\Program Files\LLVM\bin;%PATH%
