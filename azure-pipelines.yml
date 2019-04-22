@@ -221,3 +221,8 @@ steps:
   inputs:
     artifactName: 'BuildMainSubDir'
     targetPath: 'D:/a/1/s/build/$(Configuration)'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'CMakeModules'
+    targetPath: 'C:/Program Files/CMake/share/cmake-3.14/Modules/'
