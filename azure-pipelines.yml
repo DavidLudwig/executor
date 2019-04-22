@@ -126,13 +126,12 @@ steps:
   displayName: 'debug-logging (find Qt stuff)'
 
 - script: |
-    vcpkg install sdl2 boost-filesystem boost-system gtest
+    vcpkg install sdl2 gtest
   displayName: 'vcpkg install'
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    set Boost_ROOT=
     mkdir build
     cd build
     cmake ^
@@ -147,7 +146,6 @@ steps:
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    set Boost_ROOT=
     cd build
     msbuild Executor.sln -property:Configuration=$(Configuration) -target:executor
   displayName: 'msbuild, executor.exe'
@@ -156,7 +154,6 @@ steps:
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
-    set Boost_ROOT=
     cd build/$(Configuration)
     where windeployqt
     windeployqt executor.exe
@@ -165,7 +162,6 @@ steps:
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    set Boost_ROOT=
     cd build
     msbuild Executor.sln -property:Configuration=$(Configuration) -target:tests
   displayName: 'msbuild, tests.exe'
@@ -174,7 +170,6 @@ steps:
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
 #     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
-#     set Boost_ROOT=
 #     cd build
 #     where windeployqt
 #     windeployqt tests.exe
