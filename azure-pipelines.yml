@@ -141,7 +141,7 @@ steps:
       -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
       "-DBOOST_ROOT=C:\Program Files\Boost\1.69.0" ^
       "-DBOOST_LIBRARYDIR=C:\Program Files\Boost\1.69.0\lib" ^
-      -DBOOST_COMPILER=-vc141 ^
+      -DBoost_COMPILER=-vc141 ^
       -Tllvm ..
   displayName: 'cmake configure'
   continueOnError: true
