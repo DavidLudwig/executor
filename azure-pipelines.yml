@@ -142,6 +142,7 @@ steps:
       "-DBOOST_ROOT=C:\Program Files\Boost\1.69.0" ^
       "-DBOOST_LIBRARYDIR=C:\Program Files\Boost\1.69.0\lib" ^
       -DBoost_COMPILER=-vc141 ^
+      -DBoost_DEBUG=TRUE ^
       -Tllvm ..
   displayName: 'cmake configure'
   continueOnError: true
