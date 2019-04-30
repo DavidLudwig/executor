@@ -74,26 +74,34 @@ steps:
 #     artifactName: 'VCTargets'
 #     targetPath: 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/Common7/IDE/VC/VCTargets/'
 
+# - script: |
+#     c:
+#     cd c:\
+#     mkdir c:\MinGW
+#     cd c:\MinGW
+#     cd
+#     curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
+#     dir
+#     unzip mingw-get
+#     dir
+#     set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+#     where mingw-get
+#     where bison
+#     mingw-get install msys-bison-bin
+#     where bison
+#   displayName: 'install bison'
+
 - script: |
-    c:
-    cd c:\
-    mkdir c:\MinGW
-    cd c:\MinGW
-    cd
-    curl -o mingw-get.zip https://mirrors.gigenet.com/OSDN//mingw/68260/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip
-    dir
-    unzip mingw-get
-    dir
-    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
-    where mingw-get
-    where bison
-    mingw-get install msys-bison-bin
-    where bison
+    choco install winflexbison3 --yes
+    where win_bison
+    set PATH=%PATH%;C:\ProgramData\chocolatey\bin
+    where win_bison
+    clang-cl --version
   displayName: 'install bison'
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\chocolatey\bin
     c:
     cd c:\
     cd
@@ -104,6 +112,7 @@ steps:
     where perl
     @echo Finding Bison
     where bison
+    where win_bison
   displayName: 'debug-logging'
 
 - script: |
@@ -131,7 +140,7 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\chocolatey\bin
     mkdir build
     cd build
     cmake ^
@@ -149,7 +158,7 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\chocolatey\bin
     cd build
     msbuild Executor.sln -property:Configuration=$(Configuration) -target:executor
   displayName: 'msbuild, executor.exe'
@@ -157,7 +166,7 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin;C:\ProgramData\chocolatey\bin
     cd build/$(Configuration)
     where windeployqt
     windeployqt executor.exe
@@ -166,7 +175,7 @@ steps:
 
 - script: |
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin
+    set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\chocolatey\bin
     cd build
     msbuild Executor.sln -property:Configuration=$(Configuration) -target:tests
   displayName: 'msbuild, tests.exe'
@@ -174,7 +183,7 @@ steps:
 
 # - script: |
 #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin
+#     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin;C:\ProgramData\chocolatey\bin
 #     cd build
 #     where windeployqt
 #     windeployqt tests.exe
