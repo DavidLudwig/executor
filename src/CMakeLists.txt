@@ -3,10 +3,10 @@ if(NOT PERL_COMMAND)
     message(FATAL_ERROR "Cannot find command: 'perl' (needed for building!)")
 endif()
 
-find_program(BISON_COMMAND bison)
-if(NOT BISON_COMMAND)
-    message(FATAL_ERROR "Cannot find command: 'bison' (needed for building!)")
-endif()
+find_package(BISON REQUIRED)
+message("BISON_EXECUTABLE: (${BISON_EXECUTABLE})")
+message("BISON_VERSION: (${BISON_VERSION})")
+message("BISON_FOUND: (${BISON_FOUND})")
 
 cmake_policy(SET CMP0074 NEW) # don't ignore _ROOT variables (Boost_ROOT)
 find_package(Boost REQUIRED COMPONENTS filesystem system)
@@ -93,7 +93,7 @@ endforeach()
 
 add_custom_command(OUTPUT parse.tab.cpp
         DEPENDS prefs/parse.ypp
-        COMMAND ${BISON_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/prefs/parse.ypp)
+        COMMAND ${BISON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/prefs/parse.ypp)
 list(APPEND GENERATED_FILES parse.tab.cpp)
 
 
