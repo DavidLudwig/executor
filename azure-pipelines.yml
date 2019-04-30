@@ -96,7 +96,6 @@ steps:
     where win_bison
     set PATH=%PATH%;C:\ProgramData\chocolatey\bin
     where win_bison
-    clang-cl --version
   displayName: 'install bison'
 
 - script: |
