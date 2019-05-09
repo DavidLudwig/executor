@@ -431,12 +431,8 @@ namespace callfromPPC
         template<typename T>
         ParameterPasser operator<<(const T& arg);
 
-            // FIXME: this should be operator>> instead of operator%.
-            // clang 5.0.0 has a bug (PR32563) which prevents the use
-            // of operator>> in fold expressions.
-            // Change to operator>> when clang 5.0 is no longer relevant.
         template<typename T>
-        ParameterPasser operator%(T& arg);
+        ParameterPasser operator>>(T& arg);
 
         template<typename T>
         constexpr ParameterPasser operator+(const T& arg);
@@ -450,7 +446,7 @@ namespace callfromPPC
     }
 
     template<typename T>
-    ParameterPasser ParameterPasser::operator%(T& arg)
+    ParameterPasser ParameterPasser::operator>>(T& arg)
     {
         arg = get<T>();
         return *this + arg;
@@ -539,7 +535,7 @@ namespace callfromPPC
             std::tuple<Args...> args;
             ParameterPasser argGetter{cpu, guestvalues::GuestTypeTraits<uint8_t*>::reg_to_host(cpu.r[1]+24)};
 
-            (void)((argGetter % ... % std::get<Is>(args)));
+            (void)((argGetter >> ... >> std::get<Is>(args)));
             InvokerRet<Ret (Args...)>::invokeRet(cpu, fptr, std::get<Is>(args)...);
         }
         

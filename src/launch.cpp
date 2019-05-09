@@ -123,10 +123,6 @@ static void beginexecutingat(LONGINT startpc)
 }
 
 size_info_t Executor::size_info;
-
-#define VERSFMT "(0x%02x, 0x%02x, 0x%02x, 0x%02x, %d)"
-#define VERSSIZE(vp) (sizeof(VERSFMT) + (vp)->shortname[0] + 6)
-
 LONGINT Executor::ROMlib_creator;
 
 

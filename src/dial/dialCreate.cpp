@@ -374,7 +374,7 @@ DialogPtr Executor::C_GetNewDialog(INTEGER id, Ptr dst,
 
     dialog_item_list_res_h = ROMlib_getrestid(TICK("DITL"),
                                               (*dialog_res_h)->dlgditl);
-    dialog_item_list_res_h = ROMlib_copy_handle(dialog_item_list_res_h);
+    HandToHand(inout(dialog_item_list_res_h));
 
     if(!dialog_res_h || !dialog_item_list_res_h)
         return nullptr;

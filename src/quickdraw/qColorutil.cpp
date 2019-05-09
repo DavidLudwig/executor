@@ -185,16 +185,3 @@ void Executor::ROMlib_color_init(void)
         = (CTabHandle)NewHandle(sizeof(ColorTable));
     CTAB_SEED(no_stdbits_color_conversion_color_table) = 0;
 }
-
-Handle
-Executor::ROMlib_copy_handle(Handle src)
-{
-    Handle retval;
-    int handle_size;
-
-    handle_size = GetHandleSize(src);
-    retval = NewHandle(handle_size);
-    BlockMoveData(*src, *retval,
-                  handle_size);
-    return retval;
-}

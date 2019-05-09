@@ -45,7 +45,7 @@ namespace
     std::thread timer_thread;
 }
 
-int Executor::syncint_init(void)
+void Executor::syncint_init(void)
 {
     std::thread([]() {
         std::unique_lock<std::mutex> lock(mutex);
@@ -69,7 +69,6 @@ int Executor::syncint_init(void)
             }
         }
     }).detach();
-    return true;
 }
 
 void Executor::syncint_wait_interrupt()
@@ -111,14 +110,14 @@ handle_itimer_tick(int n)
     getPowerCore().requestInterrupt();
 }
 
-int Executor::syncint_init(void)
+void Executor::syncint_init(void)
 {
     struct sigaction s;
 
     s.sa_handler = handle_itimer_tick;
     sigemptyset(&s.sa_mask);
     s.sa_flags = 0;
-    return (sigaction(SIGALRM, &s, nullptr) == 0);
+    sigaction(SIGALRM, &s, nullptr);
 }
 
 /* Posting a delay of 0 will clear any pending interrupt. */

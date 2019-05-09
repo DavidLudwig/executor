@@ -95,8 +95,6 @@ bool ROMlib_sticky_menus_p = false;
 
 bool ROMlib_print = false;
 
-bool ROMlib_no_dot_files = false;
-
 bool nodrivesearch_p = false;
 bool do_autorefresh_p = false;
 

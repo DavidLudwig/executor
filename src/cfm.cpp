@@ -376,7 +376,6 @@ check_existing_connections(Str63 library, OSType arch, LoadFlags loadflags,
                            GUEST<ConnectionID> *cidp, GUEST<Ptr> *mainaddrp, Str255 errName)
 {
     /* TODO */
-    // FIXME: #warning TODO
     return fragLibNotFound;
 }
 
@@ -384,7 +383,6 @@ static void
 get_root_and_app(INTEGER *root_vrefp, LONGINT *root_diridp,
                  INTEGER *app_vrefp, LONGINT *app_diridp)
 {
-    // FIXME: #warning TODO
     /* TODO */
 }
 

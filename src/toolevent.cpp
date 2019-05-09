@@ -375,12 +375,6 @@ static BOOLEAN doevent(INTEGER em, EventRecord *evt,
                     redraw_screen();
                     break;
                 // case 0x1c: // command shift 8
-#if defined(SUPPORT_LOG_ERR_TO_RAM)
-                case 0x19: /* command shift 9: Dump RAM error log */
-                    retval = false;
-                    error_dump_ram_err_buf("\n *** cmd-shift-9 pressed ***\n");
-                    break;
-#endif
             }
             if(!retval)
                 evt->what = nullEvent;
@@ -609,20 +603,11 @@ LONGINT Executor::GetCaretTime()
     return (LM(CaretTime));
 }
 
-/*
- * These routines used to live in the various OS-specific config directories,
- * which was a real crock, since only the NEXTSTEP implementation worked
- * well.  I'm moving them here as I attempt to implement cut and paste
- * properly under Win32.
- */
-
-#define SANE_DEBUGGING
-#if defined(SANE_DEBUGGING)
-static int sane_debugging_on = 0; /* Leave this off and let the person doing the
-			      debugging turn it on if he/she wants.  If this
-			      is set to non-zero, it breaks code.  Not a
-			      very nice thing to do. */
-#endif /* SANE_DEBUGGING */
+static bool debug_supress_suspend_resume = false;
+    /* Leave this off and let the person doing the
+        debugging turn it on if he/she wants.  If this
+        is set to true, it breaks code.  Not a
+        very nice thing to do. */
 
 void
 Executor::sendsuspendevent(void)
@@ -632,9 +617,7 @@ Executor::sendsuspendevent(void)
     shouldBeSuspended = true;
     if(
         (size_info.size_flags & SZacceptSuspendResumeEvents)
-#if defined(SANE_DEBUGGING)
-        && !sane_debugging_on
-#endif /* SANE_DEBUGGING */
+        && !debug_supress_suspend_resume
         /* NOTE: Since Executor can currently only run one app at a time,
 	 suspending an app that can background causes trouble with apps
 	 like StuffIt Expander, since it makes it impossible to do work
@@ -660,9 +643,7 @@ Executor::sendresumeevent(bool cvtclip)
     shouldBeSuspended = false;
     if(
         (size_info.size_flags & SZacceptSuspendResumeEvents)
-#if defined(SANE_DEBUGGING)
-        && !sane_debugging_on
-#endif /* SANE_DEBUGGING */
+        && !debug_supress_suspend_resume
         )
     {
         what = SUSPENDRESUMEBITS | RESUME;
@@ -674,40 +655,6 @@ Executor::sendresumeevent(bool cvtclip)
                           p, ROMlib_mods);
     }
 }
-
-void
-sendcopy(void)
-{
-    Point p;
-
-    p.h = LM(MouseLocation).h;
-    p.v = LM(MouseLocation).v;
-    ROMlib_PPostEvent(keyDown, 0x0863, /* 0x63 == 'c' */
-                      (GUEST<EvQElPtr> *)0, TickCount(), p, cmdKey | btnState);
-    ROMlib_PPostEvent(keyUp, 0x0863,
-                      (GUEST<EvQElPtr> *)0, TickCount(), p, cmdKey | btnState);
-}
-
-void
-sendpaste(void)
-{
-    Point p;
-
-    p.h = LM(MouseLocation).h;
-    p.v = LM(MouseLocation).v;
-    ROMlib_PPostEvent(keyDown, 0x0976, /* 0x76 == 'v' */
-                      (GUEST<EvQElPtr> *)0, TickCount(), p, cmdKey | btnState);
-    ROMlib_PPostEvent(keyUp, 0x0976,
-                      (GUEST<EvQElPtr> *)0, TickCount(), p, cmdKey | btnState);
-}
-
-/*
- * NOTE: the code for ROMlib_send_quit below is cleaner than the code for
- *       sendcopy and sendpaste above, but it was added after 2.1pr0
- *       was released but before 2.1 was released, so we can't tamper
- *       with the above code because there's a chance it would break
- *       something.  Ick.
- */
 
 static void
 post_helper(INTEGER code, uint8_t raw, uint8_t mapped, INTEGER mods)

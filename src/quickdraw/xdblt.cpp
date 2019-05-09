@@ -681,6 +681,9 @@ static inline uint32_t
 canonicalize_pat_value_for_mode(uint32_t v, int mode, uint32_t fg_color,
                                 uint32_t bk_color, const rgb_spec_t *rgb_spec)
 {
+    if(rgb_spec)
+        v ^= ~0;
+
     if(mode & (patCopy ^ notPatCopy))
         v ^= ~0;
 

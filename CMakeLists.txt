@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+cmake_policy(VERSION 3.10...3.14)
 
 # Use packaged CMake modules for use with find_package(...), if and as needed
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
@@ -6,11 +7,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 project(Executor)
 
 set(CMAKE_CXX_STANDARD 17)
-
-cmake_policy(SET CMP0020 NEW) # Automatically link Qt executables to qtmain target on Windows.
-cmake_policy(SET CMP0074 NEW) # don't ignore _ROOT variables (Boost_ROOT)
-
-set(CMAKE_VS_GLOBALS "SpectreMitigation=false")
 
 if(WIN32)
     add_compile_options(

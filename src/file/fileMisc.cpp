@@ -530,6 +530,8 @@ void Executor::InitPaths()
 #if !defined(LITTLEENDIAN)
     ROMlib_DirectoryMap += "-be";
 #endif /* !defined(LITTLEENDIAN) */
+    if constexpr(sizeof(void*) == 4)
+        ROMlib_DirectoryMap += "32";
 
     auto efs = cmrc::resources::get_filesystem();
     fs::path systemFolder = ROMlib_SystemFolder;

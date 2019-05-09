@@ -58,8 +58,6 @@ extern "C" {
 #define ERROR_SUPPORTED_MASK (~0) /* Compile in support for all errors. */
 #endif
 
-#define SUPPORT_LOG_ERR_TO_RAM /* simplification opportunity: is this feature useful? */
-
 #define ERROR_BIT_MASK(err) (1 << (err))
 
 /* Returns true iff that error is supported by this compile. */
@@ -185,10 +183,6 @@ extern void _errno_warning(const char *file, int line, const char *fn,
     ATTR_FORMAT(printf, 4, 5);
 #else
 #define warning_errno(fmt, args...)
-#endif
-
-#if defined(SUPPORT_LOG_ERR_TO_RAM)
-extern void error_dump_ram_err_buf(const char *separator_message);
 #endif
 
 //extern const char NULL_STRING[];

@@ -3,6 +3,19 @@
 
 using namespace Executor;
 
+static fs::path makeADPath(AppleDoubleScheme scheme, const fs::path& p)
+{
+    switch(scheme)
+    {
+        case AppleDoubleScheme::percent:
+            return p.parent_path() / ("%" + p.filename().string());
+        case AppleDoubleScheme::dotunderscore:
+            return p.parent_path() / ("._" + p.filename().string());
+        default:
+            std::abort();
+    }
+}
+
 bool AppleDoubleItemFactory::isHidden(const fs::directory_entry& e)
 {
     if(e.path().filename().string().substr(0,1) == "%")
@@ -17,21 +30,27 @@ ItemPtr AppleDoubleItemFactory::createItemForDirEntry(ItemCache& itemcache, CNID
 {
     if(fs::is_regular_file(e.path()))
     {
-        fs::path adpath = e.path().parent_path() / ("%" + e.path().filename().string());
-        
-        if(fs::is_regular_file(adpath))
-            return std::make_shared<AppleDoubleFileItem>(itemcache, parID, cnid, e.path(), macname);
+        for(auto scheme : { AppleDoubleScheme::percent, AppleDoubleScheme::dotunderscore })
+        {
+            if(fs::is_regular_file(makeADPath(scheme, e.path())))
+                return std::make_shared<AppleDoubleFileItem>(scheme, itemcache, parID, cnid, e.path(), macname);
+        }
     }
     return nullptr;
 }
 
 void AppleDoubleItemFactory::createFile(const fs::path& path)
 {
-    fs::path adpath = path.parent_path() / ("%" + path.filename().string());
+    fs::path adpath = makeADPath(AppleDoubleScheme::percent, path);
 
     PlainDataFork data(path, PlainDataFork::create);
     AppleSingleDoubleFile rsrc(std::make_unique<PlainDataFork>(adpath, PlainDataFork::create),
                                 AppleSingleDoubleFile::create_double);
+}
+
+AppleDoubleFileItem::AppleDoubleFileItem(AppleDoubleScheme scheme, ItemCache& itemcache, CNID parID, CNID cnid, fs::path p, mac_string_view name)
+    : FileItem(itemcache, parID, cnid, p, name), scheme(scheme)
+{
 }
 
 std::shared_ptr<AppleSingleDoubleFile> AppleDoubleFileItem::access()
@@ -41,7 +60,7 @@ std::shared_ptr<AppleSingleDoubleFile> AppleDoubleFileItem::access()
         return p;
     else
     {
-        fs::path adpath = path().parent_path() / ("%" + path().filename().string());
+        fs::path adpath = makeADPath(scheme, path());
         p = std::make_shared<AppleSingleDoubleFile>(std::make_unique<PlainDataFork>(adpath));
         openedFile = p;
         return p;
@@ -73,15 +92,15 @@ void AppleDoubleFileItem::setInfo(ItemInfo info)
 void AppleDoubleFileItem::deleteItem()
 {
     fs::remove(path());
-    fs::path adpath = path().parent_path() / ("%" + path().filename().string());
+    fs::path adpath = makeADPath(scheme, path());
     boost::system::error_code ec;
     fs::remove(adpath, ec);
 }
 
 void AppleDoubleFileItem::moveItem(const fs::path& newPath, mac_string_view newName)
 {
-    fs::path adpathOld = path().parent_path() / ("%" + path().filename().string());
-    fs::path adpathNew = newPath.parent_path() / ("%" + newPath.filename().string());
+    fs::path adpathOld = makeADPath(scheme, path());
+    fs::path adpathNew = makeADPath(scheme, newPath);
 
     fs::rename(path(), newPath);
 

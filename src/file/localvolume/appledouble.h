@@ -6,6 +6,12 @@
 
 namespace Executor
 {
+enum class AppleDoubleScheme
+{
+    percent,
+    dotunderscore
+};
+
 class AppleDoubleItemFactory : public ItemFactory
 {
 public:
@@ -20,10 +26,11 @@ class AppleSingleDoubleFile;
 class AppleDoubleFileItem : public FileItem
 {
     std::weak_ptr<AppleSingleDoubleFile> openedFile;
+    AppleDoubleScheme scheme;
 
     std::shared_ptr<AppleSingleDoubleFile> access();
 public:
-    using FileItem::FileItem;
+    AppleDoubleFileItem(AppleDoubleScheme scheme, ItemCache& itemcache, CNID parID, CNID cnid, fs::path p, mac_string_view name = {});
 
     virtual ItemInfo getInfo() override;
     virtual void setInfo(ItemInfo info) override;

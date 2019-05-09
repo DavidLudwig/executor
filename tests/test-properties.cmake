@@ -5,6 +5,4 @@
 set_tests_properties(
         FileTest.SetFInfo_CrDat 
         FileTest.SetFLock 
-        QuickDraw.BasicQDColor32 
-        QuickDraw.GrayPattern32 
     APPEND PROPERTIES LABELS xfail)

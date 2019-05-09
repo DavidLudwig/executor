@@ -182,45 +182,6 @@ flush_stream(void)
 
 static void err_printf(const char *fmt, ...);
 
-#if defined(SUPPORT_LOG_ERR_TO_RAM)
-
-/* Current number of characters in the err buf, not counting the "\0". */
-static uint32_t ram_err_buf_size;
-
-/* Maximum # of bytes that can be stored in RAM buffer. */
-static uint32_t ram_err_buf_max_size;
-
-/* Actual current text of RAM err buf. */
-static char *ram_err_buf;
-
-/* Dumps the current RAM error buf and clears it. */
-void error_dump_ram_err_buf(const char *separator_message)
-{
-    if(ram_err_buf_size > 0)
-    {
-        bool old_log_p;
-
-        old_log_p = log_err_to_ram_p;
-        log_err_to_ram_p = false; /* print it, don't log it! */
-        err_printf("%s%s", ram_err_buf, separator_message);
-        log_err_to_ram_p = old_log_p;
-
-        /* Clear the RAM buffer and start over. */
-        ram_err_buf_size = 0;
-        ram_err_buf_max_size = 0;
-        ram_err_buf = nullptr;
-        free(ram_err_buf);
-    }
-}
-
-static void
-error_dump_at_exit(void)
-{
-    error_dump_ram_err_buf("\n*** ATEXIT ***\n");
-}
-
-#endif /* SUPPORT_LOG_ERR_TO_RAM */
-
 static void
 err_vprintf(const char *fmt, va_list ap)
 {
@@ -253,58 +214,8 @@ err_vprintf(const char *fmt, va_list ap)
     if(fmt == nullptr)
         fmt = "";
 
-#if !defined(SUPPORT_LOG_ERR_TO_RAM)
     vfprintf(fp, fmt, ap);
     fflush(fp);
-#else /* defined (SUPPORT_LOG_ERR_TO_RAM) */
-    if(!log_err_to_ram_p)
-    {
-        vfprintf(fp, fmt, ap);
-        fflush(fp);
-    }
-    else
-    {
-        static bool atexit_set_up = false;
-
-        /* Set ourselves up to dump everything on exit. */
-        if(!atexit_set_up)
-        {
-            atexit(error_dump_at_exit);
-            atexit_set_up = true;
-        }
-
-        /* Make sure we've got at least 64K free for the upcoming sprintf.
-       * There's no easy way to know how much memory we're going to need.
-       */
-        if(ram_err_buf_size + 65536 >= ram_err_buf_max_size)
-        {
-            void *new_buf;
-
-            if(ram_err_buf_max_size < 65536)
-                ram_err_buf_max_size = 128 * 1024 - 32;
-            else
-                ram_err_buf_max_size *= 2;
-
-            /* Try to allocate more room for the RAM buffer. */
-            new_buf = realloc(ram_err_buf, ram_err_buf_max_size);
-            if(new_buf == nullptr)
-            {
-                /* Out of memory!  Dump what we've got and start over. */
-                error_dump_ram_err_buf("\n *** Out of RAM, flushing log ***\n");
-                vfprintf(fp, fmt, ap);
-                goto done;
-            }
-            else
-            {
-                ram_err_buf = (char *)new_buf;
-            }
-        }
-
-        vsprintf(ram_err_buf + ram_err_buf_size, fmt, ap);
-        ram_err_buf_size += strlen(ram_err_buf + ram_err_buf_size);
-    }
-done:;
-#endif /* SUPPORT_LOG_ERR_TO_RAM */
 }
 
 static void

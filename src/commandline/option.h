@@ -70,9 +70,6 @@ typedef struct opt_val
 } opt_val_t;
 
 typedef std::vector<opt_val_t> opt_database_t;
-/* common options */
-extern const option_vec common_opts;
-extern opt_database_t common_db;
 
 void opt_init(void);
 void opt_shutdown(void);

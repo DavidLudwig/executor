@@ -29,11 +29,6 @@
 
 using namespace Executor;
 
-/*
- * NOTE: HandToHand is not directly called by the outside world.
- *	 Hence, the handle that hp points to is not swapped.
- */
-
 OSErr Executor::HandToHand(GUEST<Handle> *hp)
 {
     Handle nh;

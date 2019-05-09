@@ -511,38 +511,32 @@ RAW_68K_IMPLEMENTATION(bad_trap_unimplemented)
 {
     char buf[1024];
 
-    /* TODO: more */
-    switch(mostrecenttrap)
+    sprintf(buf,
+            "Fatal error.\r"
+            "Jumped to unimplemented trap handler, "
+            "probably by getting the address of one of these traps: [");
     {
-        default:
-            sprintf(buf,
-                    "Fatal error.\r"
-                    "Jumped to unimplemented trap handler, "
-                    "probably by getting the address of one of these traps: [");
-            {
-                int i;
-                bool need_comma_p;
+        int i;
+        bool need_comma_p;
 
-                need_comma_p = false;
-                for(i = 0; i < (int)NELEM(bad_traps) && i < n_bad_traps; ++i)
-                {
-                    if(need_comma_p)
-                        strcat(buf, ",");
-                    {
-                        char trap_buf[7];
-                        sprintf(trap_buf, "0x%04x", bad_traps[i]);
-                        gui_assert(trap_buf[6] == 0);
-                        strcat(buf, trap_buf);
-                    }
-                    need_comma_p = true;
-                }
+        need_comma_p = false;
+        for(i = 0; i < (int)NELEM(bad_traps) && i < n_bad_traps; ++i)
+        {
+            if(need_comma_p)
+                strcat(buf, ",");
+            {
+                char trap_buf[7];
+                sprintf(trap_buf, "0x%04x", bad_traps[i]);
+                gui_assert(trap_buf[6] == 0);
+                strcat(buf, trap_buf);
             }
-            strcat(buf, "].");
-            system_error(buf, 0,
-                         "Restart", nullptr, nullptr,
-                         nullptr, nullptr, nullptr);
-            break;
+            need_comma_p = true;
+        }
     }
+    strcat(buf, "].");
+    system_error(buf, 0,
+                    "Restart", nullptr, nullptr,
+                    nullptr, nullptr, nullptr);
 
     ExitToShell();
     return /* dummy */ -1;

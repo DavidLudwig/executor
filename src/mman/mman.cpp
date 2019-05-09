@@ -456,8 +456,6 @@ void InitMemory(void *thingOnStack)
     InitZone(0, 32, memory + ROMlib_syszone_size, LM(SysZone));
 
     ROMlib_InitZones();
-
-
 }
 
 void SetApplBase(Ptr newbase)

@@ -672,8 +672,6 @@ extern void canonical_from_bogo_color(uint32_t index,
 #define AVERAGE_COLOR(c1, c2, ratio, out) \
     (average_color(LM(TheGDevice), (c1), (c2), (ratio), (out)))
 
-extern Handle ROMlib_copy_handle(Handle);
-
 #define DEFAULT_ITABLE_RESOLUTION 4
 
 /* this probably belongs elsewhere as well */

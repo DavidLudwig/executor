@@ -426,6 +426,7 @@ set(misc_sources
   bindec.cpp 
   toolmath.cpp
   macstrings.cpp
+  init.cpp
   )
 
 set(include_sources 
@@ -559,14 +560,11 @@ add_library(romlib ${sources}
 
 target_include_directories(romlib PUBLIC . include/ ${CMAKE_CURRENT_BINARY_DIR})
 
-# front-end-${FRONT_END}
 target_link_libraries(romlib arch-${HOST_ARCH})
 target_link_libraries(romlib lmdb)
 
 if(HOST_OS STREQUAL win32 OR HOST_OS STREQUAL macosx)
     target_link_libraries(romlib os-${HOST_OS})
-else()
-    target_link_libraries(romlib ${DB_LIBRARY})
 endif()
 
 target_link_libraries(romlib Threads::Threads syn68k PowerCore mon)

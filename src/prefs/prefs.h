@@ -44,7 +44,6 @@ extern bool ROMlib_pretend_edition;
 extern bool ROMlib_speech_enabled;
 
 extern bool ROMlib_sticky_menus_p;
-extern bool ROMlib_no_dot_files;
 
 extern bool nodrivesearch_p;
 

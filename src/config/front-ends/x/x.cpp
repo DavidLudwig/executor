@@ -1195,9 +1195,6 @@ bool X11VideoDriver::init()
 
     get_bool_resource("trueColor", &truecolor_p);
 
-    if(get_string_resource("debug", &t_str))
-        opt_put_val(common_db, "debug", t_str, pri_x_resource, false);
-
     if(!get_string_resource("geometry", &geom))
         geom = 0;
     /* default */
