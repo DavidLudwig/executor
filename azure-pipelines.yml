@@ -252,6 +252,10 @@ jobs:
   - checkout: self
     submodules: true
   - script: |
+      type -P cmake
+      cmake --version
+    displayName: 'debug stuff'
+  - script: |
       brew install boost qt ninja
     displayName: 'brew prerequisites'
   - script: |
