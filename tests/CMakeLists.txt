@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+include(GoogleTest)
+
 function(add_compilefail_tests filename)
     configure_file(${filename} ${CMAKE_BINARY_DIR}/${filename}.junk)
     file(READ ${filename} text)
