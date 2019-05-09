@@ -64,12 +64,17 @@ if(CMAKE_SYSTEM_NAME MATCHES Retro.*)
     set_target_properties(tests PROPERTIES LINK_FLAGS "-Wl,-gc-sections")
 
 else()
-    find_package(GTest REQUIRED)
     add_executable(tests
         ${TEST_SOURCES}
         ${NATIVE_TEST_SOURCES}
         main_executor.cpp)
-    target_link_libraries(tests GTest::GTest romlib)
+    if(WIN32)
+        find_package(GTest REQUIRED)
+        target_link_libraries(tests GTest::GTest romlib)
+    else()
+        add_subdirectory(googletest)
+        target_link_libraries(tests gtest romlib)
+    endif()
     target_compile_definitions(tests PRIVATE -DEXECUTOR)
     if(CMAKE_COMPILER_IS_GNUCXX)
         target_compile_options(tests PRIVATE -Wno-multichar)

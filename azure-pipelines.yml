@@ -252,7 +252,7 @@ jobs:
   - checkout: self
     submodules: true
   - script: |
-      brew install boost qt ninja gtest
+      brew install boost qt ninja
     displayName: 'brew prerequisites'
   - script: |
       mkdir build
