@@ -123,7 +123,8 @@ jobs:
       pip install aqtinstall
       C:
       cd \
-      python -m aqt $(qt_version) windows desktop win32_msvc2015
+      python -m aqt help
+      python -m aqt install $(qt_version) windows desktop win32_msvc2015
     displayName: 'install qt'
 
   - script: |
