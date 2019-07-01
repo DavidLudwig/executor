@@ -1,3 +1,6 @@
+variables:
+  qt_version: 5.13.0
+
 trigger:
 - master
 - azure-pipelines-2
@@ -120,15 +123,15 @@ jobs:
       pip install aqtinstall
       C:
       cd \
-      python -m aqt 5.11.3 windows desktop win32_msvc2015
+      python -m aqt $(qt_version) windows desktop win32_msvc2015
     displayName: 'install qt'
 
   - script: |
       rem set
       dir C:\
-      dir C:\Qt5.11.3
-      dir C:\Qt5.11.3\5.11.3
-      dir /s C:\Qt5.11.3\5.11.3\*.dll
+      dir C:\Qt$(qt_version)
+      dir C:\Qt$(qt_version)\$(qt_version)
+      dir /s C:\Qt$(qt_version)\$(qt_version)\*.dll
       dir "C:/Program Files/Boost/1.69.0"
       dir "C:/Program Files/Boost/1.69.0/lib"
       dir "C:/Program Files/Boost/1.69.0/libs"
@@ -148,7 +151,7 @@ jobs:
         -DCMAKE_BUILD_TYPE=$(Configuration) ^
         -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake ^
         -DFRONT_END=qt ^
-        -DQt5Gui_DIR=C:\Qt5.11.3\5.11.3\msvc2015\lib\cmake\Qt5Gui ^
+        -DQt5Gui_DIR=C:\Qt$(qt_version)\$(qt_version)\msvc2015\lib\cmake\Qt5Gui ^
         "-DBOOST_ROOT=C:\Program Files\Boost\1.69.0" ^
         "-DBOOST_LIBRARYDIR=C:\Program Files\Boost\1.69.0\lib" ^
         -DBoost_COMPILER=-vc141 ^
@@ -167,7 +170,7 @@ jobs:
 
   - script: |
       call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-      set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin;C:\ProgramData\chocolatey\bin
+      set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt$(qt_version)\$(qt_version)\msvc2015\bin;C:\ProgramData\chocolatey\bin
       cd build/$(Configuration)
       where windeployqt
       windeployqt executor.exe
@@ -184,15 +187,15 @@ jobs:
 
   # - script: |
   #     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
-  #     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt5.11.3\5.11.3\msvc2015\bin;C:\ProgramData\chocolatey\bin
+  #     set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Qt$(qt_version)\$(qt_version)\msvc2015\bin;C:\ProgramData\chocolatey\bin
   #     cd build
   #     where windeployqt
   #     windeployqt tests.exe
   #   displayName: 'windeployqt, tests.exe'
 
 
-    # C:\Qt5.11.3\5.11.3\msvc2015
-    # C:\Qt5.11.3\5.11.3\msvc2017_64
+    # C:\Qt$(qt_version)\$(qt_version)\msvc2015
+    # C:\Qt$(qt_version)\$(qt_version)\msvc2017_64
 
   #   displayName: 'cmake'
   # # - script: |
@@ -206,7 +209,7 @@ jobs:
   # #       -DCMAKE_CXX_COMPILER=clang-cl ^
   # #       -DFRONT_END=qt ^
   # #       -DBISON_COMMAND=win_bison ^
-  # #       -DCMAKE_PREFIX_PATH=C:\Qt5.11.3\5.11.3\msvc2017_64\lib\cmake ^
+  # #       -DCMAKE_PREFIX_PATH=C:\Qt$(qt_version)\$(qt_version)\msvc2017_64\lib\cmake ^
   # #       -DBoost_COMPILER=-vc141 ^
   # #       ..
   # #     cmake --build .
