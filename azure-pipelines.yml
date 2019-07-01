@@ -32,11 +32,11 @@ jobs:
       python -m aqt help
     displayName: 'aqt help'
 
-  - script: |
-      C:
-      cd \
-      python -m aqt list
-    displayName: 'aqt list'
+  # - script: |
+  #     C:
+  #     cd \
+  #     python -m aqt list
+  #   displayName: 'aqt list'
 
   - script: |
       C:
