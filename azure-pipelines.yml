@@ -45,7 +45,6 @@ jobs:
     displayName: 'aqt install -h'
 
   - script: |
-      # pip install aqtinstall
       C:
       cd \
       python -m aqt install $(qt_version) windows desktop win32_msvc2015
