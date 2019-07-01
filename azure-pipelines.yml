@@ -23,6 +23,35 @@ jobs:
     displayName: 'log environment variables'
 
   - script: |
+      pip install aqtinstall
+    displayName: 'pip install aqtinstall'
+
+  - script: |
+      C:
+      cd \
+      python -m aqt help
+    displayName: 'aqt help'
+
+  - script: |
+      C:
+      cd \
+      python -m aqt list
+    displayName: 'aqt list'
+
+  - script: |
+      C:
+      cd \
+      python -m aqt install -h
+    displayName: 'aqt install -h'
+
+  - script: |
+      # pip install aqtinstall
+      C:
+      cd \
+      python -m aqt install $(qt_version) windows desktop win32_msvc2015
+    displayName: 'aqt install'
+
+  - script: |
       choco install llvm --yes
       where clang-cl
       set PATH=C:\Program Files\LLVM\bin;%PATH%
@@ -118,14 +147,6 @@ jobs:
       where bison
       where win_bison
     displayName: 'debug-logging'
-
-  - script: |
-      pip install aqtinstall
-      C:
-      cd \
-      python -m aqt help
-      python -m aqt install $(qt_version) windows desktop win32_msvc2015
-    displayName: 'install qt'
 
   - script: |
       rem set
