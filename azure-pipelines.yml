@@ -188,7 +188,6 @@ jobs:
       cd build
       msbuild Executor.sln -property:Configuration=$(Configuration) -target:executor
     displayName: 'msbuild, executor.exe'
-    continueOnError: true
 
   - script: |
       call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
@@ -197,7 +196,6 @@ jobs:
       where windeployqt
       windeployqt executor.exe
     displayName: 'windeployqt, executor.exe'
-    continueOnError: true
 
   - script: |
       call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
