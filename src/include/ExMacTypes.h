@@ -10,6 +10,7 @@
 
 #include <base/mactype.h>
 #include <base/byteswap.h>
+#include <stdexcept>
 
 namespace Executor
 {
