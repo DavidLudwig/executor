@@ -47,7 +47,7 @@ jobs:
   - script: |
       C:
       cd \
-      python -m aqt install $(qt_version) windows desktop win32_msvc2015
+      python -m aqt install 5.13.0 windows desktop win64_msvc2017_64
     displayName: 'aqt install'
 
   - script: |
