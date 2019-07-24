@@ -1,6 +1,6 @@
 variables:
   qt_version: 5.13.0
-  qt_arch_windows: win64_msvc2017_64
+  qt_arch_windows: win32_msvc2017
 
 trigger:
 - master
