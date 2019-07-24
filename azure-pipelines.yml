@@ -1,5 +1,6 @@
 variables:
   qt_version: 5.13.0
+  qt_arch_windows: win64_msvc2017_64
 
 trigger:
 - master
@@ -47,7 +48,7 @@ jobs:
   - script: |
       C:
       cd \
-      python -m aqt install 5.13.0 windows desktop win64_msvc2017_64
+      python -m aqt install $(qt_version) windows desktop $(qt_arch_windows)
     displayName: 'aqt install'
 
   - script: |
