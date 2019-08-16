@@ -198,6 +198,11 @@ jobs:
     displayName: 'windeployqt, executor.exe'
 
   - script: |
+      tree /f /a build
+    displayName: 'log build directory contents'
+    continueOnError: true
+
+  - script: |
       call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\vsdevcmd.bat"
       set PATH=C:\Program Files\LLVM\bin;%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\chocolatey\bin
       cd build
